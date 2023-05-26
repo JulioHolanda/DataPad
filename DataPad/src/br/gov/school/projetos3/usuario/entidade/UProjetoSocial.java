@@ -1,4 +1,4 @@
-package br.gov.school.projetos3.gerenciamento.entidades;
+package br.gov.school.projetos3.usuario.entidade;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -6,7 +6,11 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import br.gov.school.projetos3.post.entidade.PostList;
+import br.gov.school.projetos3.util.entidade.*;
+
 public class UProjetoSocial extends Usuario {
+    private long id;
 	private Localizacao cep;
 	private String nomeFantasia;
 	private String cadastroFisJur;
@@ -14,6 +18,7 @@ public class UProjetoSocial extends Usuario {
 	private String descricao;
 	private PostList posts;
 	private Contato contato;
+
 	public UProjetoSocial(long id, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato) {
 		super(nome);
 		this.id = gerarId(cadastroFisJur);
@@ -66,7 +71,8 @@ public class UProjetoSocial extends Usuario {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	public abstract long gerarId(String cadastroFisJur) {
+	
+	public long gerarId(String cadastroFisJur) {
         try {
             // Remova quaisquer caracteres não numéricos do CPF/CNPJ
             String numericString = cpfCnpj.replaceAll("[^\\d]", "");

@@ -1,4 +1,4 @@
-package br.gov.school.projetos3.gerenciamento.entidades;
+package br.gov.school.projetos3.usuario.entidade;
 
 public abstract class Usuario {
 	private long id;

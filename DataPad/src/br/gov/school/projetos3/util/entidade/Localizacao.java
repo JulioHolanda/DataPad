@@ -1,4 +1,4 @@
-package br.gov.school.projetos3.gerenciamento.entidades;
+package br.gov.school.projetos3.util.entidade;
 
 public class Localizacao {
     private int numero;
