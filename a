@@ -1,0 +1,45 @@
+[33mcommit 8fc7c5f5622ba46f2de1350d5213cd3b627479e1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: NicoleVictory <99563517+NicoleVictory@users.noreply.github.com>
+Date:   Sat May 27 15:17:56 2023 -0300
+
+    New class - DAO Generico
+
+[33mcommit 9d5cf456f6ff4d5c44fe95e3f26f53669f4ac40a[m
+Author: Aleixo <dac2@cesar.school>
+Date:   Fri May 26 15:09:09 2023 -0300
+
+    package division created & add categoria entity & add EnumCateg entity & add EnumNicho entity
+
+[33mcommit a0d72ea65f7399e71be45557e345e335a82c0c98[m
+Author: gl-schneck <99268789+gl-schneck@users.noreply.github.com>
+Date:   Mon May 22 20:00:06 2023 -0300
+
+    Update Contato.java
+    
+    Classe Contato modificada, seguindo o diagrama de classes
+
+[33mcommit 51a02216da5e687b9565ad8bb421101927cb137e[m
+Author: gl-schneck <99268789+gl-schneck@users.noreply.github.com>
+Date:   Mon May 22 17:12:11 2023 -0300
+
+    Adicionar classe Contato
+
+[33mcommit e966dd2b5984ea24b6610319183e7e94cdb25697[m
+Author: dudumcm <emcm@cesar.school>
+Date:   Sun May 21 23:11:27 2023 -0300
+
+    Adição da classe de localização
+
+[33mcommit e617143d2ce0be905ebdad7e9d7feccb0daaec9d[m
+Author: Julio H Cavalcanti <juliophc@msn.com>
+Date:   Fri May 19 10:39:08 2023 -0300
+
+    UProjetoSocial
+    
+    criação das classes Usuário e Usuário Projeto Social (suposto metodo de gerar ID)
+
+[33mcommit 14985d19f6de0438dca13ce7146395bba6a38555[m
+Author: Júlio H. Cavalcanti <98336880+JulioHolanda@users.noreply.github.com>
+Date:   Wed May 17 22:46:18 2023 -0300
+
+    Initial commit

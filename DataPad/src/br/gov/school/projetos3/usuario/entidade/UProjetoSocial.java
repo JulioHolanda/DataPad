@@ -19,17 +19,18 @@ public class UProjetoSocial extends Usuario {
 	private PostList posts;
 	private Contato contato;
 
-	public UProjetoSocial(long id, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato) {
+	public UProjetoSocial(String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato) {
 		super(nome);
-		this.id = gerarId(cadastroFisJur);
+		this.id = this.gerarId();
+		// como faria pra gerar o id??? mediador? ou 'this' na funcao abaixo?
 		this.cep = cep;
 		this.nomeFantasia = nomeFantasia;
 		this.cadastroFisJur = cadastroFisJur;
 		this.categoria = categoria;
 		this.contato = contato;
 	}
-	public UProjetoSocial(long id, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
-		this(id, nome, cep, nomeFantasia, cadastroFisJur, categoria, contato);
+	public UProjetoSocial( String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
+		this(nome, cep, nomeFantasia, cadastroFisJur, categoria, contato);
 		this.descricao = descricao;
 	}
 	public Localizacao getCep() {
@@ -72,10 +73,11 @@ public class UProjetoSocial extends Usuario {
 		this.contato = contato;
 	}
 	
-	public long gerarId(String cadastroFisJur) {
+	@Override
+	public long gerarId() {
         try {
             // Remova quaisquer caracteres não numéricos do CPF/CNPJ
-            String numericString = cpfCnpj.replaceAll("[^\\d]", "");
+            String numericString = cadastroFisJur.replaceAll("[^\\d]", "");
 
             // Obtenha a data atual como uma string no formato "yyyyMMdd"
             String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));

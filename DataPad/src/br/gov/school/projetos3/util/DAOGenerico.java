@@ -1,10 +1,12 @@
-package br.gov.cesarschool.poo.fidelidade.util;
+package br.gov.school.projetos3.util;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import br.gov.school.projetos3.usuario.entidade.Identificavel;
 
 public class DAOGenerico {
 	private String diretorioBase;
