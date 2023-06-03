@@ -100,6 +100,4 @@ public class UProjetoSocial extends Usuario {
 		return (this.getIdUser()+"");
 	}
 
-
-
 }

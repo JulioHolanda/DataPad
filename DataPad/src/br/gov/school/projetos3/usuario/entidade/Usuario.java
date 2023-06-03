@@ -30,8 +30,5 @@ public abstract class Usuario extends Identificavel {
 	public String getCadastroFisJur() {
 		return cadastroFisJur;
 	}
-
-
-	public abstract long gerarId();
 	
 }
