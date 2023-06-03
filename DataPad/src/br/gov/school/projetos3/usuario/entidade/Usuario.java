@@ -1,29 +1,37 @@
 package br.gov.school.projetos3.usuario.entidade;
 
 public abstract class Usuario extends Identificavel {
-	private static final String FILE_SEP = System.getProperty("file.separator");
-	private static final String DIR_BASE = "." + FILE_SEP + "usuario" + FILE_SEP;
-	private static final String EXT = ".dat";
 	
-	private long id;
+	private long idUser;
 	private String nome;
-	public Usuario(String nome) {
+	private String cadastroFisJur;
+	public Usuario(long idUser, String nome, String cadastroFisJur) {
+		this.idUser = idUser;
 		this.nome = nome;
+		this.cadastroFisJur = cadastroFisJur;
 	}
-	public long getId() {
-		return id;
-	}
+	
+
 	public String getNome() {
 		return nome;
 	}
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
+	public long getIdUser() {
+		return idUser;
+	}
+
+
+	public String getCadastroFisJur() {
+		return cadastroFisJur;
+	}
+
+
 	public abstract long gerarId();
 	
-	@Override
-	public String obterChave() {
-		String nomeArq = DIR_BASE + id + EXT;
-		return nomeArq;
-	}
 }
