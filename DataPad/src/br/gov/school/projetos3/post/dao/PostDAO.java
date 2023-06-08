@@ -31,5 +31,33 @@ public class PostDAO {
     }
 
   //metodo para deletar seria necessario?
+    
+	public Post[] buscarTodos() {
+		Identificavel[] identificaveis = daoEncapsulado.buscarTodos();
+		if(identificaveis == null) {
+			return new Post[0];
+		}
+		
+		Post[] clientes = new Post[identificaveis.length];
+		
+		int contClientes = 0;
+		
+		for(Identificavel ident:identificaveis) {
+			
+			Object objeto = (Object) ident;
+			
+			if(objeto instanceof Post) {
+				clientes[contClientes] = (Post) ident;
+				
+				contClientes++;
+			}
+		}
+		
+		if(contClientes == 0) {
+			return new Post[0];
+		}
+		return clientes;
+		
+	}
 
 }

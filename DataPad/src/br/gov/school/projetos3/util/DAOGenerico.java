@@ -95,4 +95,49 @@ public class DAOGenerico {
             }
         }
     }
+    
+	public Identificavel[] buscarTodos() {
+		File diretorio = new File(diretorioBase);
+		
+		if (!diretorio.exists()) {
+			return null;
+		}
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			
+			File[] files = diretorio.listFiles((dir, name) -> name.toLowerCase().endsWith(".dat"));
+			
+			if(files.length == 0) {
+				return new Identificavel[0];
+			}
+			
+			Identificavel[] ident = new Identificavel[files.length];
+			
+			int cont = 0;
+			
+			for(File file: files) {
+				fis = new FileInputStream(file);
+				ois = new ObjectInputStream(fis);
+				
+				ident[cont] = (Identificavel) ois.readObject();
+						
+				cont += 1;
+			}
+			Identificavel[] identRet = ident;
+			return  identRet;
+
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao ler chave" + e.getMessage());
+		} finally {
+			try {
+				ois.close();
+			} catch (Exception e) {
+			}
+			try {
+				fis.close();
+			} catch (Exception e) {
+			}
+		}
+	}
 }
