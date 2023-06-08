@@ -1,8 +1,8 @@
 package br.gov.school.projetos3.post.dao;
 
+import br.gov.school.projetos3.geral.dao.DAOGenerico;
 import br.gov.school.projetos3.post.entidade.Post;
 import br.gov.school.projetos3.usuario.entidade.Identificavel;
-import br.gov.school.projetos3.util.DAOGenerico;
 
 public class PostDAO {
 	private static final String FILE_SEP;

@@ -1,6 +1,6 @@
 package br.gov.school.projetos3.usuario.dao;
 
-import br.gov.school.projetos3.util.DAOGenerico;
+import br.gov.school.projetos3.geral.dao.DAOGenerico;
 import br.gov.school.projetos3.usuario.entidade.Identificavel;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
