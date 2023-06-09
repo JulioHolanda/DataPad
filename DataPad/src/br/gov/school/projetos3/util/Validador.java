@@ -1,11 +1,30 @@
 package br.gov.school.projetos3.util;
 
+import br.gov.school.projetos3.util.entidade.Localizacao;
+
 public class Validador {
-/*
+
 	public static boolean ehCepValido(Localizacao cep){
+
+		if(cep.getNumero() == 0){
+	        return false;
+	    }
+
+		else if (cep.getRua() == null){
+			return false;
+	    }
+
+	    else if (cep.getEstadoProv() == null) {
+	    	return false;
+	    }
+
+	    else if (cep.getPais() == null) {
+	    	return false;
+	    }
+	
 		return true;
 	}
- * */
+
 	
 	public static boolean ehCnpjValido(String cadastroFisJur) {
 		

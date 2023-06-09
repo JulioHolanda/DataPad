@@ -1,9 +1,5 @@
 package br.gov.school.projetos3.usuario.negocio;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -64,13 +60,12 @@ public class UProjetoSocialMediator {
 
 	
 	private String validar(UProjetoSocial uProjetoSocial) {
-	    /*
+
 		if(Validador.ehCepValido(uProjetoSocial.getCep()) == false){
 	        return "CEP Invalido";
 	    }
-	     * */
 
-	   if (StringUtil.ehNuloOuBranco(uProjetoSocial.getNomeFantasia())){
+		else if (StringUtil.ehNuloOuBranco(uProjetoSocial.getNomeFantasia())){
 	        return "Nome Invalido";
 	    }
 
