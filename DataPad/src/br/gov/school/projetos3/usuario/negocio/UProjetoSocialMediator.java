@@ -1,8 +1,13 @@
 package br.gov.school.projetos3.usuario.negocio;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
@@ -25,7 +30,6 @@ public class UProjetoSocialMediator {
 	
 	public UProjetoSocial[] consultarUProjetosSociaisOrdemAleatoria() {
 		UProjetoSocial[] projetosSociais = repositorioUProjSocial.buscarTodos();
-		
 
 		List<UProjetoSocial> projetosSociaisList = Arrays.asList(projetosSociais);
 
@@ -36,6 +40,15 @@ public class UProjetoSocialMediator {
 		
 	}
 	
+    private String gerarIdDeCnpj(String cnpj) {
+        // Remover caracteres não numéricos do CNPJ
+        String cleanedCnpj = cnpj.replaceAll("[^0-9]", "");
+
+        // Gerar um ID baseado no CNPJ usando UUID
+        UUID uuid = UUID.nameUUIDFromBytes(cleanedCnpj.getBytes());
+        return uuid.toString();
+    }
+    
 	/*
 	private String validar(UProjetoSocial cliente) {
 	    if(ValidadorCPF.ehCpfValido(cliente.getCpf()) == false){

@@ -5,10 +5,13 @@ public abstract class Usuario extends Identificavel {
 	private long idUser;
 	private String nome;
 	private String cadastroFisJur;
-	public Usuario(long idUser, String nome, String cadastroFisJur) {
+	private String senha;
+	
+	public Usuario(long idUser, String senha, String nome, String cadastroFisJur) {
 		this.idUser = idUser;
 		this.nome = nome;
 		this.cadastroFisJur = cadastroFisJur;
+		this.senha = senha;
 	}
 	
 
