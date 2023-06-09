@@ -12,6 +12,7 @@ import java.util.UUID;
 import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
+import br.gov.school.projetos3.util.Validador;
 
 public class UProjetoSocialMediator {
 	private static UProjetoSocialMediator instance;
@@ -27,6 +28,75 @@ public class UProjetoSocialMediator {
 		}
 		return instance;
 	}
+
+	
+    public String gerarIdDeCnpj(String cnpj) {
+        // Remover caracteres não numéricos do CNPJ
+        String cleanedCnpj = cnpj.replaceAll("[^0-9]", "");
+
+        // Gerar um ID baseado no CNPJ usando UUID
+        UUID uuid = UUID.nameUUIDFromBytes(cleanedCnpj.getBytes());
+        return uuid.toString();
+    }
+    
+	public String incluir(UProjetoSocial uProjetoSocial) {
+		String msg = validar(uProjetoSocial); 
+        if (msg == null){
+        	msg = "Projeto Social registrado com Sucesso";
+            boolean res = repositorioUProjSocial.incluir(uProjetoSocial);
+            if (!res) {
+            	msg = "Erro ao incluir Projeto Social no reposit�rio";
+            }
+        } 
+        return msg;
+    }
+	
+    public String alterar(UProjetoSocial uProjetoSocial) {
+    	String msgErro = validar(uProjetoSocial); 
+        if (msgErro == null){
+            boolean res = repositorioUProjSocial.alterar(uProjetoSocial);
+            if (!res) {
+            	msgErro = "Erro ao alterar Projeto Social no repositorio";
+            }
+        }
+        return msgErro;
+    }
+
+	
+	private String validar(UProjetoSocial uProjetoSocial) {
+	    /*
+		if(Validador.ehCepValido(uProjetoSocial.getCep()) == false){
+	        return "CEP Invalido";
+	    }
+	     * */
+
+	   if (StringUtil.ehNuloOuBranco(uProjetoSocial.getNomeFantasia())){
+	        return "Nome Invalido";
+	    }
+
+	    else if (uProjetoSocial.getCategoria() == null) {
+	        return "Categoria Invalida";
+	    }
+
+	    else if (uProjetoSocial.getDescricao() == null) {
+	        return "descricao Invalida";
+	    }
+
+	    else if (uProjetoSocial.getContato() == null) {
+	        return "Contato Invalido";
+	    }
+
+	    else if(Validador.ehCnpjValido(uProjetoSocial.getCadastroFisJur()) == false){
+	        return "Cadastro Invalido";
+	    }
+
+	    else if (uProjetoSocial.getNome() == null) {
+	        return "Numero de endere�o inv�lido";
+	    }
+
+	    return null;
+    }
+	
 	
 	public UProjetoSocial[] consultarUProjetosSociaisOrdemAleatoria() {
 		UProjetoSocial[] projetosSociais = repositorioUProjSocial.buscarTodos();
@@ -39,63 +109,5 @@ public class UProjetoSocialMediator {
 		return projetosSociais;
 		
 	}
-	
-    private String gerarIdDeCnpj(String cnpj) {
-        // Remover caracteres não numéricos do CNPJ
-        String cleanedCnpj = cnpj.replaceAll("[^0-9]", "");
-
-        // Gerar um ID baseado no CNPJ usando UUID
-        UUID uuid = UUID.nameUUIDFromBytes(cleanedCnpj.getBytes());
-        return uuid.toString();
-    }
-    
-	/*
-	private String validar(UProjetoSocial cliente) {
-	    if(ValidadorCPF.ehCpfValido(cliente.getCpf()) == false){
-	        return "CPF Inv�lido";
-	    }
-
-	    else if (StringUtil.ehNuloOuBranco(cliente.getNomeCompleto())){
-	        return "Nome Inv�lido";
-	    }
-
-	    else if (cliente.getSexo() == null) {
-	        return "Sexo Inv�lido";
-	    }
-
-	    else if (cliente.obterIdade() < 18) {
-	        return "A idade deve ser maior ou igual a 18.";
-	    }
-
-	    else if (cliente.getRenda() < 0) {
-	        return "Renda Inv�lida";
-	    }
-
-	    else if (cliente.getEndereco() == null) {
-	        return "Endere�o Inv�lido";
-	    }
-
-	    else if (StringUtil.ehNuloOuBranco(cliente.getEndereco().getLogradouro()) || cliente.getEndereco().getLogradouro().length() < 4) {
-	        return "Logradouro Inv�lido"; 
-	    }
-
-	    else if (cliente.getEndereco().getNumero() < 0) {
-	        return "Numero de endere�o inv�lido";
-	    }
-
-	    else if (StringUtil.ehNuloOuBranco(cliente.getEndereco().getCidade())){
-	        return "Cidade Inv�lida"; 
-	    }
-	    
-	    else if (StringUtil.ehNuloOuBranco(cliente.getEndereco().getEstado())) {
-	        return "Estado Inv�lida"; 
-	    }
-
-	    else if (StringUtil.ehNuloOuBranco(cliente.getEndereco().getPais())) {
-	        return "Pais Inv�lido"; 
-	    }
-	    return null;
-    }
-	 * */
 
 }
