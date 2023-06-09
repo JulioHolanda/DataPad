@@ -25,7 +25,7 @@ public class PostMediator {
     
 	public static String generateId(LocalDateTime dateTime, String idUser) {
         String formattedDateTime = dateTime.toString().replace(":", "");
-        return formattedDateTime + "_" + idUser;
+        return "1_" + formattedDateTime + "_" + idUser;
     }
 	
 	public String incluir(Post post) {
