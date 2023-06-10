@@ -19,6 +19,7 @@ import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 import br.gov.school.projetos3.usuario.negocio.UProjetoSocialMediator;
 import br.gov.school.projetos3.util.Enum.EnumCategoria;
+import br.gov.school.projetos3.util.Enum.EnumNicho;
 import br.gov.school.projetos3.util.entidade.Categoria;
 import br.gov.school.projetos3.util.entidade.Contato;
 import br.gov.school.projetos3.util.entidade.Localizacao;
@@ -149,7 +150,7 @@ public class CadastroUProjetoSocial {
 		
 		Label lblNicho = new Label(shell, SWT.NONE);
 		lblNicho.setBounds(268, 124, 55, 15);
-		lblNicho.setText("Nicho");
+		lblNicho.setText("Nicho:");
 		
 		Label lblDescrio = new Label(shell, SWT.NONE);
 		lblDescrio.setBounds(10, 145, 55, 15);
@@ -201,7 +202,7 @@ public class CadastroUProjetoSocial {
 		
 		Combo comboNicho = new Combo(shell, SWT.NONE);
 		comboNicho.setItems(new String[] {"CRIANÇAS", "JOVENS", "ADULTOS", "ANIMAIS", "FAMÍLIAS", "COMUNIDADES", "IDOSOS", "PCD", "DEPENDENTES_QUÍMICOS", "MULHERES", "LGBTQIAP"});
-		comboNicho.setBounds(314, 116, 136, 23);
+		comboNicho.setBounds(329, 116, 136, 23);
 		
 		Button btnCadastrar = new Button(shell, SWT.NONE);
 		btnCadastrar.setBounds(360, 387, 161, 25);
@@ -214,8 +215,8 @@ public class CadastroUProjetoSocial {
 		btnCadastrar.addSelectionListener(new SelectionAdapter(){
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				UProjetoSocialDAO UPSDao = new UProjetoSocialDAO();
-				if (textCadastroFisJur.getText()==null || textCidade.getText()==null|| textDescricao.getText()==null||
+
+				if (comboCategoria.getText()==null || comboNicho.getText()==null|| textCadastroFisJur.getText()==null || textCidade.getText()==null|| textDescricao.getText()==null||
 						textEmail.getText()==null||textEstado.getText()==null||textNomeFantasia.getText()==null||textNomeUsuario.getText()==null||
 						textNumero.getText()==null||textPais.getText()==null||textPais.getText()==null||textRua.getText()==null||
 						textSenha.getText()==null||textTelefone.getText().length()<10) {
@@ -230,8 +231,8 @@ public class CadastroUProjetoSocial {
 				pContato.setRedeSocial2(textRedeSocial2.getText());
 				
 				Categoria projetoCategoria = new Categoria();
-				//projetoCategoria.setCategoria(EnumCateg.obterPorCodigo(comboCategoria.getCaretPosition()+1));
-				//projetoCategoria.setNicho(EnumNiho.obterPorCodigo(comboNicho.getCaretPosition()+1));
+				projetoCategoria.setCategoria(EnumCategoria.obterPorCodigo(comboCategoria.getCaretPosition()));
+				projetoCategoria.setNicho(EnumNicho.obterPorCodigo(comboNicho.getCaretPosition()));
 				
 				Localizacao pLocalizacao = new Localizacao();
 				pLocalizacao.setComplemento(textComplemento.getText());
@@ -245,7 +246,7 @@ public class CadastroUProjetoSocial {
 				UProjetoSocial novoUProjetoSocial = new UProjetoSocial(pMediator.gerarIdDeCnpj(textCadastroFisJur.getText()), textSenha.getText(), textNomeUsuario.getText(), pLocalizacao, textNomeFantasia.getText(), textCadastroFisJur.getText(), projetoCategoria, pContato, textDescricao.getText());
 				
 				JOptionPane.showMessageDialog(null, pMediator.incluir(novoUProjetoSocial));
-
+				return;
 			}
 		});
 

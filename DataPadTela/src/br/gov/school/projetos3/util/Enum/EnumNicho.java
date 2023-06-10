@@ -1,6 +1,8 @@
 package br.gov.school.projetos3.util.Enum;
 
-public enum EnumNicho {
+import java.io.Serializable;
+
+public enum EnumNicho implements Serializable{
 	CRIANCAS(1, "Crianças"),
     JOVENS(2, "Jovens"),
     ADULTOS(3, "Adultos"),
