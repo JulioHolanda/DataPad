@@ -38,25 +38,25 @@ public class PostDAO {
 			return new Post[0];
 		}
 		
-		Post[] clientes = new Post[identificaveis.length];
+		Post[] post = new Post[identificaveis.length];
 		
-		int contClientes = 0;
+		int contPost = 0;
 		
 		for(Identificavel ident:identificaveis) {
 			
 			Object objeto = (Object) ident;
 			
 			if(objeto instanceof Post) {
-				clientes[contClientes] = (Post) ident;
+				post[contPost] = (Post) ident;
 				
-				contClientes++;
+				contPost++;
 			}
 		}
 		
-		if(contClientes == 0) {
+		if(contPost == 0) {
 			return new Post[0];
 		}
-		return clientes;
+		return post;
 		
 	}
 

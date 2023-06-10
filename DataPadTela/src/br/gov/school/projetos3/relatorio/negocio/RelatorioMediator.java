@@ -1,15 +1,12 @@
 package br.gov.school.projetos3.relatorio.negocio;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.relatorio.dao.RelatorioDAO;
 import br.gov.school.projetos3.relatorio.entidade.Relatorio;
 import br.gov.school.projetos3.relatorio.negocio.RelatorioMediator;
-import br.gov.school.projetos3.usuario.entidade.Relatorio;
+
 
 public class RelatorioMediator {
 	

@@ -32,25 +32,25 @@ public class UProjetoSocialDAO {
 			return new UProjetoSocial[0];
 		}
 		
-		UProjetoSocial[] clientes = new UProjetoSocial[identificaveis.length];
+		UProjetoSocial[] uProjetoSocial = new UProjetoSocial[identificaveis.length];
 		
-		int contClientes = 0;
+		int contUProjetoSocial = 0;
 		
 		for(Identificavel ident:identificaveis) {
 			
 			Object objeto = (Object) ident;
 			
 			if(objeto instanceof UProjetoSocial) {
-				clientes[contClientes] = (UProjetoSocial) ident;
+				uProjetoSocial[contUProjetoSocial] = (UProjetoSocial) ident;
 				
-				contClientes++;
+				contUProjetoSocial++;
 			}
 		}
 		
-		if(contClientes == 0) {
+		if(contUProjetoSocial == 0) {
 			return new UProjetoSocial[0];
 		}
-		return clientes;
+		return uProjetoSocial;
 		
 	}
 }
