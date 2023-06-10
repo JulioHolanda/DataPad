@@ -1,6 +1,8 @@
 package br.gov.school.projetos3.util.entidade;
 
-public class Contato {
+import java.io.Serializable;
+
+public class Contato implements Serializable{
 	private String telefone;
 	private String email;
 	private String redeSocial1;

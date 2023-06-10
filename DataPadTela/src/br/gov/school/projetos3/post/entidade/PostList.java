@@ -1,9 +1,10 @@
 package br.gov.school.projetos3.post.entidade;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostList {
+public class PostList implements Serializable {
     private List<Post> posts;
     
     public PostList() {

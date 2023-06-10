@@ -17,7 +17,7 @@ public class UProjetoSocial extends Usuario {
 	private PostList posts;
 	private Contato contato;
 
-	public UProjetoSocial(long idUser, String senha, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
+	public UProjetoSocial(String idUser, String senha, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
 		super(idUser, senha , nome, cadastroFisJur);
 		// como faria pra gerar o id??? mediador? ou 'this' na funcao abaixo?
 		this.cep = cep;

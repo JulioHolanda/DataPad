@@ -1,15 +1,17 @@
 package br.gov.school.projetos3.util.entidade;
 
+import java.io.Serializable;
+
 import br.gov.school.projetos3.util.Enum.*;
 
-public class Categoria {
-    private EnumCateg categoria;
+public class Categoria implements Serializable{
+    private EnumCategoria categoria;
     private EnumNicho nicho;
 
-    public EnumCateg getCategoria() {
+    public EnumCategoria getCategoria() {
         return categoria;
     }
-    public void setCategoria(EnumCateg categoria) {
+    public void setCategoria(EnumCategoria categoria) {
         this.categoria = categoria;
     }
     public EnumNicho getNicho() {

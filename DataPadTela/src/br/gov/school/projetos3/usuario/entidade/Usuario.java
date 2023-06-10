@@ -2,12 +2,12 @@ package br.gov.school.projetos3.usuario.entidade;
 
 public abstract class Usuario extends Identificavel {
 	
-	private long idUser;
+	private String idUser;
 	private String nome;
 	private String cadastroFisJur;
 	private String senha;
 	
-	public Usuario(long idUser, String senha, String nome, String cadastroFisJur) {
+	public Usuario(String idUser, String senha, String nome, String cadastroFisJur) {
 		this.idUser = idUser;
 		this.nome = nome;
 		this.cadastroFisJur = cadastroFisJur;
@@ -25,7 +25,7 @@ public abstract class Usuario extends Identificavel {
 	}
 
 
-	public long getIdUser() {
+	public String getIdUser() {
 		return idUser;
 	}
 

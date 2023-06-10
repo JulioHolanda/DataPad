@@ -1,6 +1,8 @@
 package br.gov.school.projetos3.util.entidade;
 
-public class Localizacao {
+import java.io.Serializable;
+
+public class Localizacao implements Serializable{
     private int numero;
     private String complemento;
     private String rua;

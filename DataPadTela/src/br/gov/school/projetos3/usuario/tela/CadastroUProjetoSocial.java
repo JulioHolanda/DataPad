@@ -1,12 +1,28 @@
 package br.gov.school.projetos3.usuario.tela;
 
 import org.eclipse.swt.widgets.Display;
+import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.List;
+
+import javax.swing.JOptionPane;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+
+import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
+import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
+import br.gov.school.projetos3.usuario.negocio.UProjetoSocialMediator;
+import br.gov.school.projetos3.util.Enum.EnumCategoria;
+import br.gov.school.projetos3.util.entidade.Categoria;
+import br.gov.school.projetos3.util.entidade.Contato;
+import br.gov.school.projetos3.util.entidade.Localizacao;
+
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Button;
 
@@ -66,6 +82,7 @@ public class CadastroUProjetoSocial {
 		shell.setText("SWT Application");
 		
 		textNomeUsuario = new Text(shell, SWT.BORDER);
+		textNomeUsuario.setToolTipText("");
 		textNomeUsuario.setBounds(107, 10, 139, 21);
 		
 		textSenha = new Text(shell, SWT.BORDER);
@@ -179,9 +196,11 @@ public class CadastroUProjetoSocial {
 		lblNewLabel.setText("Complemento:");
 		
 		Combo comboCategoria = new Combo(shell, SWT.NONE);
+		comboCategoria.setItems(new String[] {"EDUCAÇÃO", "SAÚDE", "RECURSOS_BÁSICOS", "ACOLHIMENTOS", "NATUREZA", "ARTE"});
 		comboCategoria.setBounds(106, 118, 140, 23);
 		
 		Combo comboNicho = new Combo(shell, SWT.NONE);
+		comboNicho.setItems(new String[] {"CRIANÇAS", "JOVENS", "ADULTOS", "ANIMAIS", "FAMÍLIAS", "COMUNIDADES", "IDOSOS", "PCD", "DEPENDENTES_QUÍMICOS", "MULHERES", "LGBTQIAP"});
 		comboNicho.setBounds(314, 116, 136, 23);
 		
 		Button btnCadastrar = new Button(shell, SWT.NONE);
@@ -191,6 +210,44 @@ public class CadastroUProjetoSocial {
 		Button btnCancelar = new Button(shell, SWT.NONE);
 		btnCancelar.setBounds(85, 387, 112, 25);
 		btnCancelar.setText("Cancelar");
+		
+		btnCadastrar.addSelectionListener(new SelectionAdapter(){
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				UProjetoSocialDAO UPSDao = new UProjetoSocialDAO();
+				if (textCadastroFisJur.getText()==null || textCidade.getText()==null|| textDescricao.getText()==null||
+						textEmail.getText()==null||textEstado.getText()==null||textNomeFantasia.getText()==null||textNomeUsuario.getText()==null||
+						textNumero.getText()==null||textPais.getText()==null||textPais.getText()==null||textRua.getText()==null||
+						textSenha.getText()==null||textTelefone.getText().length()<10) {
+					 JOptionPane.showMessageDialog(null, "Formato inválido");
+					 return;
+				}
+							
+				Contato pContato = new Contato();
+				pContato.setEmail(textEmail.getText());
+				pContato.setTelefone(textTelefone.getText());
+				pContato.setRedeSocial1(textRedeSocial1.getText());
+				pContato.setRedeSocial2(textRedeSocial2.getText());
+				
+				Categoria projetoCategoria = new Categoria();
+				//projetoCategoria.setCategoria(EnumCateg.obterPorCodigo(comboCategoria.getCaretPosition()+1));
+				//projetoCategoria.setNicho(EnumNiho.obterPorCodigo(comboNicho.getCaretPosition()+1));
+				
+				Localizacao pLocalizacao = new Localizacao();
+				pLocalizacao.setComplemento(textComplemento.getText());
+				pLocalizacao.setEstadoProv(textEstado.getText());
+				pLocalizacao.setNumero(Integer.parseInt(textNumero.getText()));
+				pLocalizacao.setPais(textPais.getText());
+				pLocalizacao.setRua(textRua.getText());
+				
+				UProjetoSocialMediator pMediator = UProjetoSocialMediator.getInstance();
+				
+				UProjetoSocial novoUProjetoSocial = new UProjetoSocial(pMediator.gerarIdDeCnpj(textCadastroFisJur.getText()), textSenha.getText(), textNomeUsuario.getText(), pLocalizacao, textNomeFantasia.getText(), textCadastroFisJur.getText(), projetoCategoria, pContato, textDescricao.getText());
+				
+				JOptionPane.showMessageDialog(null, pMediator.incluir(novoUProjetoSocial));
+
+			}
+		});
 
 	}
 }
