@@ -6,15 +6,17 @@ import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.relatorio.dao.RelatorioDAO;
 import br.gov.school.projetos3.relatorio.entidade.Relatorio;
 import br.gov.school.projetos3.relatorio.negocio.RelatorioMediator;
+import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
+import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
 
 public class RelatorioMediator {
 	
 	private static RelatorioMediator instance;
-	public RelatorioDAO repositorioRelatorio;
+	public UProjetoSocialDAO repositorioRelatorio;
 	
 	private RelatorioMediator() {
-		repositorioRelatorio = new RelatorioDAO();
+		repositorioRelatorio = new UProjetoSocialDAO();
 	}
 	
 	public static RelatorioMediator getInstance() {
@@ -24,16 +26,11 @@ public class RelatorioMediator {
 		return instance;
 	}
     
-	public static String generateId(LocalDateTime dateTime, String idUser) {
-        String formattedDateTime = dateTime.toString().replace(":", "");
-        return "2_" + formattedDateTime + "_" + idUser;
-    }
-	
-	public String incluir(Relatorio relatorio) {
+	public String incluir(UProjetoSocial projetoSocial,Relatorio relatorio) {
 		String msg = validar(relatorio); 
         if (msg == null){
         	msg = "relatorio registrado com Sucesso";
-            boolean res = repositorioRelatorio.incluir(relatorio);
+            boolean res = repositorioRelatorio.alterar(projetoSocial);
             if (!res) {
             	msg = "Erro ao incluir relatorio no repositorio";
             }
@@ -49,13 +46,5 @@ public class RelatorioMediator {
 
 	    return null;
     }
-	
-
-	public Relatorio[] coletarRelatorios() {
-		Relatorio[] relatorios = repositorioRelatorio.buscarTodos();
-
-		return relatorios;
-	}
-	
 
 }

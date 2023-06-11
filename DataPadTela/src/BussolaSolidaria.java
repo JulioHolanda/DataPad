@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import br.gov.school.projetos3.post.Enum.EnumNecessidades;
 import br.gov.school.projetos3.post.entidade.Post;
+import br.gov.school.projetos3.relatorio.entidade.Relatorio;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 import br.gov.school.projetos3.usuario.negocio.UProjetoSocialMediator;
 import br.gov.school.projetos3.util.Enum.EnumCategoria;
@@ -45,7 +46,6 @@ public class BussolaSolidaria {
 	                    opcao = -1;
 	                    
 	                    break;
-	                    
 	                default:
 	                    System.out.println("Opção inválida. Digite um número válido.");
 	                    
@@ -376,20 +376,59 @@ public class BussolaSolidaria {
 	                    System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
 	                    temp = ENTRADA.nextLine();
 	                    }while(temp == "" || temp == null);
-                    String descricao = temp;
+                    String descricaoPost = temp;
                     temp = "";
                     
-                    LocalDateTime atual = LocalDateTime.now();
+                    LocalDateTime atualPost = LocalDateTime.now();
                     
-                    Post post = new Post(atual, EnumNecessidades.obterPorCodigo(necessidade), descricao);
+                    Post post = new Post(atualPost, EnumNecessidades.obterPorCodigo(necessidade), descricaoPost);
                     
                     projetoSocial.setPost(post);
 	          
 	                break;
-	            case 2: //Cria relatorio
+	            case 2: 
+	            	System.out.println("Opção selecionada: Publicar uma atualização");
+	            	
+	            	System.out.println("\n==== Criação de Atualizações ====\n");
 	                
+	                do {
+	                    System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
+	                    temp = ENTRADA.nextLine();
+	                    }while(temp == "" || temp == null);
+                    String descricaoAtualizacao = temp;
+                    temp = "";
+                    
+                    LocalDateTime atualAtualizacao = LocalDateTime.now();
+                    
+                    Relatorio relatorioAdd = new Relatorio(atualAtualizacao, descricaoAtualizacao);
+                    
+                    projetoSocial.setRelatorio(relatorioAdd);
+	            	
 	                break;
 	            case 3: // mostra relatorios e posts
+	            	String idUser = projetoSocial.getIdUser();
+	                String nomeFantasia = projetoSocial.getNomeFantasia();
+	                Categoria categoria = projetoSocial.getCategoria();
+	                String nome = projetoSocial.getNome();
+	                Contato contato = projetoSocial.getContato();
+	                Relatorio relatorio = projetoSocial.getRelatorio();
+	            	
+	            	StringBuilder mensagem = new StringBuilder();
+	                mensagem.append("Nome: ").append(nome).append("\n");
+	                mensagem.append("Nome Fantasia: ").append(nomeFantasia).append("\n");
+	                mensagem.append("ID do Usuário: ").append(idUser).append("\n");
+	                mensagem.append("Categoria: ").append(categoria.getCategoria()).append("\n");
+	                mensagem.append("Contatos:\n");
+	                mensagem.append("- Telefone: ").append(contato.getTelefone()).append("\n");
+	                mensagem.append("- Email: ").append(contato.getEmail()).append("\n");
+	                mensagem.append("- Rede Social 1: ").append(contato.getRedeSocial1()).append("\n");
+	                mensagem.append("- Rede Social 2: ").append(contato.getRedeSocial2()).append("\n");
+	                
+	                
+	                mensagem.append("\nInformações do Relatório:\n");
+	                mensagem.append("- Data de Criação: ").append(relatorio.getDataCriacao()).append("\n");
+	                mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
+	                System.out.println("Informações da ONG:\n" + mensagem.toString());
 	                
 	                break;
 	            case 0: // sai do perfil

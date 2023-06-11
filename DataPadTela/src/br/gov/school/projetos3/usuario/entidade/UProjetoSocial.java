@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.gov.school.projetos3.post.entidade.Post;
 import br.gov.school.projetos3.post.entidade.PostList;
 import br.gov.school.projetos3.relatorio.entidade.Relatorio;
+import br.gov.school.projetos3.relatorio.entidade.RelatorioList;
 import br.gov.school.projetos3.util.entidade.*;
 
 @SuppressWarnings("serial")
@@ -16,7 +17,7 @@ public class UProjetoSocial extends Usuario {
 	private String descricao;
 	private PostList posts;
 	private Contato contato;
-	private ArrayList<Relatorio> relatorios;
+	private RelatorioList relatorios;
 
 	public UProjetoSocial(String idUser, String senha, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
 		super(idUser, senha , nome, cadastroFisJur);
@@ -53,6 +54,11 @@ public class UProjetoSocial extends Usuario {
 		}
 		return posts.getAllPosts();
 	}
+	
+	public Relatorio getRelatorio(){
+		return relatorios.getLastRelatorio();
+	}
+	
 	public Contato getContato() {
 		return contato;
 	}
@@ -68,8 +74,8 @@ public class UProjetoSocial extends Usuario {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public void setPosts(PostList posts) {
-		this.posts = posts;
+	public void setRelatorio(Relatorio relatorio) {
+		this.relatorios.addRelatorio(this, relatorio);
 	}
 	public void setContato(Contato contato) {
 		this.contato = contato;
@@ -86,11 +92,6 @@ public class UProjetoSocial extends Usuario {
 	public ArrayList<Relatorio> getRelatorios() {
 		return relatorios;
 	}
-
-	public void setRelatorios(ArrayList<Relatorio> relatorios) {
-		this.relatorios = relatorios;
-	}
-
 	@Override
 	public String obterChave() {
 		return (this.getIdUser()+"");
