@@ -46,14 +46,14 @@ public class BussolaSolidaria {
                     System.out.print("Nome: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String nome = ENTRADA.nextLine();
+                    String nome = temp;
                     temp = "";
                     
                     do {
                     System.out.print("Senha: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String senha = ENTRADA.nextLine();
+                    String senha = temp;
                     temp = "";
                     
                     System.out.println("\n==== Cadastro de Projeto Social ====\n");
@@ -62,14 +62,14 @@ public class BussolaSolidaria {
                     System.out.print("Nome Fantasia: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String nomeFantasia = ENTRADA.nextLine();
+                    String nomeFantasia = temp;
                     temp = "";
 
                     do {
                     System.out.print("CPF/CNPJ: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String cadastroFisJur = ENTRADA.nextLine();
+                    String cadastroFisJur = temp;
                     temp = "";
 
                     EnumCategoria[] enumCategoria = EnumCategoria.values();
@@ -77,12 +77,12 @@ public class BussolaSolidaria {
                     do {
                     System.out.print("Categoria (escolha por número): \n");
                     for (EnumCategoria eCategoria:enumCategoria ) {
-                    	System.out.println(cont+ " - " + eCategoria+"\n");
+                    	System.out.println(cont+ " - " + eCategoria);
                     	cont++;
                     }
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
-                    String areaAtacao = ENTRADA.nextLine();
+                    String areaAtacao = temp;
                     temp = "";
                     
                     EnumNicho[] enumNicho = EnumNicho.values();
@@ -90,12 +90,12 @@ public class BussolaSolidaria {
                     do {
                     System.out.print("Publico Alvo (escolha por número): \n");
                     for(EnumNicho eNicho: enumNicho) {
-                    	System.out.println(cont+ " - " + eNicho+"\n");
+                    	System.out.println(cont+ " - " + eNicho);
                     	cont++;
                     }
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null ||Integer.parseInt(temp)<1 || Integer.parseInt(temp)>11);
-                    String nicho = ENTRADA.nextLine();
+                    String nicho = temp;
                     temp = "";
                     
                     Categoria categoria = new Categoria();
@@ -106,7 +106,7 @@ public class BussolaSolidaria {
                     System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String descricao = ENTRADA.nextLine();
+                    String descricao = temp;
                     temp = "";
                     
                     System.out.println("\n==== Cadastro de Localização ====\n");
@@ -115,34 +115,34 @@ public class BussolaSolidaria {
                     System.out.print("País: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String pais = ENTRADA.nextLine();
+                    String pais = temp;
                     temp = "";
                     
                     do {
                     System.out.print("Estado/Província: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String estado = ENTRADA.nextLine();
+                    String estado = temp;
                     temp = "";
                     
                     do {
                     System.out.print("Rua: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String rua = ENTRADA.nextLine();
+                    String rua = temp;
                     temp = "";
                     
                     do {
                     System.out.print("Número do Imóvel: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String numEndereco = ENTRADA.nextLine();
+                    String numEndereco = temp;
                     temp = "";
                     
 
                     System.out.print("Complemento (não obrigatório): ");
                     temp = ENTRADA.nextLine();
-                    String complemento = ENTRADA.nextLine();
+                    String complemento = temp;
                     temp = "";
                     
                     Localizacao localUProjetoSocial = new Localizacao();
@@ -158,25 +158,24 @@ public class BussolaSolidaria {
                     System.out.print("Telefone: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String telefone = ENTRADA.nextLine();
+                    String telefone = temp;
                     temp = "";
                     
                     do {
                     System.out.print("Email: ");
                     temp = ENTRADA.nextLine();
                     }while(temp == "" || temp == null);
-                    String email = ENTRADA.nextLine();
+                    String email = temp;
                     temp = "";
                     
                     System.out.print("Rede social 1 (não obrigatório): ");
                     temp = ENTRADA.nextLine();
-
-                    String redeSocial1 = ENTRADA.nextLine();
+                    String redeSocial1 = temp;
                     temp = "";
                     
                     System.out.print("Rede social 2 (não obrigatório): ");
                     temp = ENTRADA.nextLine();
-                    String redeSocial2 = ENTRADA.nextLine();
+                    String redeSocial2 = temp;
                     temp = "";
                     
                     Contato contatoNovoProjeto = new Contato();
@@ -190,7 +189,7 @@ public class BussolaSolidaria {
                     UProjetoSocial novoProjeto = new UProjetoSocial(projetoMediator.gerarIdDeCnpj(cadastroFisJur), senha, nome, localUProjetoSocial, nomeFantasia, cadastroFisJur,
                     		categoria, contatoNovoProjeto, descricao);
                     
-                    System.out.println(projetoMediator.incluir(novoProjeto));
+                    System.out.println("\n --- "+projetoMediator.incluir(novoProjeto)+" ---\n");
                     // Chamar método para realizar o cadastro
                     break;
                 case 0:
