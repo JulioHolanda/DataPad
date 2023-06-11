@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Asus
- *
- */
-module DataPad {
-}
