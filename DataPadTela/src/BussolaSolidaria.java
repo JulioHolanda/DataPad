@@ -31,7 +31,48 @@ public class BussolaSolidaria {
             switch (opcao) {
                 case 1:
                     System.out.println("Opção selecionada: Visualizar Projetos");
-                    // Chamar método para realizar a busca
+                    int opcaoBusca;
+        do {
+            exibirMenuBusca();
+            opcaoBusca = ENTRADA.nextInt();
+            ENTRADA.nextLine(); // Limpar o buffer
+
+            switch (opcaoBusca) {
+                case 1:
+                    System.out.print("Digite o nome para buscar: ");
+                    String nome = ENTRADA.nextLine();
+                    List<UProjetoSocial> ongsEncontradasNome = buscarPorNome(projetoSocialDAO, nome);
+                    System.out.println("Resultados da busca por nome: " + nomeBusca);
+                    exibirResultados(ongsEncontradasNome);
+                    break;
+                case 2:
+                    System.out.print("Digite o estado para buscar: ");
+                    String categoriaBuca = ENTRADA.nextLine();
+                    List<UProjetoSocial> ongsEncontradasEstado = buscarPorEstado(projetoSocialDAO, estadoBusca);
+                    System.out.println("Resultados da busca por estado: " + estadoBusca);
+                    exibirResultados(ongsEncontradasEstado);
+                    break;
+                case 3:
+                    System.out.print("Digite a categoria para buscar (EDUCACAO, SAUDE, CULTURA): ");
+                    String categoriaBusca = ENTRADA.nextLine();
+                    EnumCateg enumCategoria = EnumCateg.valueOf(categoria.toUpperCase());
+                    List<UProjetoSocial> ongsEncontradasCategoria = BuscadorONGs.buscarPorCategoria(projetoSocialDAO, enumCategoria);
+                System.out.println("Resultados da busca por categoria: " + categoriaBusca);
+                  exibirResultados(ongsEncontradasCategoria);
+                    break;
+                case 4:
+                    //implementação necessidade
+                    break;
+                case 0:
+                    System.out.println("Saindo da busca...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Por favor, tente novamente.");
+                    break;
+            }
+            System.out.println();
+        } while (opcaoBusca != 0);
+			 
                     break;
                 case 2:
                     System.out.println("Opção selecionada: Login");
@@ -205,5 +246,72 @@ public class BussolaSolidaria {
     }
 
 	
+public static void exibirMenuBusca() {
+        System.out.println("===== Menu de Busca =====");
+        System.out.println("1. Buscar por nome");
+        System.out.println("2. Buscar por estado");
+        System.out.println("3. Buscar por categoria");
+        System.out.println("4. Buscar por necessidade");
+        System.out.println("0. Sair");
+        System.out.print("Digite a opção desejada: ");
+    }
 
+    public static List<UProjetoSocial> buscarPorNome(UProjetoSocialDAO projetoSocialDAO, String nome) {
+        UProjetoSocial[] todos = projetoSocialDAO.buscarTodos();
+        List<UProjetoSocial> resultado = new ArrayList<>();
+        for (UProjetoSocial ong : todos) {
+            if (ong.getNome().equalsIgnoreCase(nome)) {
+                resultado.add(ong);
+            }
+        }
+        return resultado;
+    }
+
+    public static List<UProjetoSocial> buscarPorEstado(UProjetoSocialDAO projetoSocialDAO, String estado) {
+        UProjetoSocial[] todos = projetoSocialDAO.buscarTodos();
+        List<UProjetoSocial> resultado = new ArrayList<>();
+        for (UProjetoSocial ong : todos) {
+            if (ong.getCep().getEstadoProv().equalsIgnoreCase(estado)) {
+                resultado.add(ong);
+            }
+        }
+        return resultado;
+    }
+
+     public static List<UProjetoSocial> buscarPorCategoria(UProjetoSocialDAO projetoSocialDAO, EnumCateg categoria) {
+        UProjetoSocial[] todos = projetoSocialDAO.buscarTodos();
+        List<UProjetoSocial> resultado = new ArrayList<>();
+        for (UProjetoSocial ong : todos) {
+            if (ong.getCategoria().getCategoria() == categoria) {
+                resultado.add(ong);
+            }
+        }
+        return resultado;
+    }/*public static List<UProjetoSocial> buscarPorPost(UProjetoSocialDAO projetoSocialDAO, EnumNecessidades necessidade)
+     {
+        UProjetoSocial[] todos = projetoSocialDAO.buscarTodos();
+        List<UProjetoSocial> resultado = new ArrayList<>();
+        for (UProjetoSocial ong : todos) {
+            PostList posts = ong.getPosts();
+            if (posts != null && (outra condição))) {
+                resultado.add(ong);
+            }
+        }
+        return resultado;
+    } */
+
+  public static void exibirResultados(List<UProjetoSocial> ongs) {
+        if (ongs.isEmpty()) {
+            System.out.println("Nenhum resultado encontrado.");
+            return;
+        }
+        for (UProjetoSocial ong : ongs) {
+            System.out.println("Nome: " + ong.getNome());
+            System.out.println("Categoria: " + ong.getCategoria().getCategoria());
+            System.out.println("Localização: " + ong.getCep().getEstadoProv());
+            //Não consegui fazer a necessidade
+            //System.out.println("Necessidade: " + ong.getPost());
+            System.out.println("-----");
+        }
+    }
 }
