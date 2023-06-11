@@ -1,7 +1,10 @@
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import br.gov.school.projetos3.post.Enum.EnumNecessidades;
+import br.gov.school.projetos3.post.entidade.Post;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 import br.gov.school.projetos3.usuario.negocio.UProjetoSocialMediator;
 import br.gov.school.projetos3.util.Enum.EnumCategoria;
@@ -14,29 +17,271 @@ public class BussolaSolidaria {
 
 	private static final Scanner ENTRADA = new Scanner(System.in);
 	private static UProjetoSocialMediator projetoSocialMediator = UProjetoSocialMediator.getInstance();
+	private static UProjetoSocial projetoSocial;
+	private static boolean isLogged = false;
 	
 	public static void main(String[] args) {
-        
-    	String temp;
     	
     	int opcao = -1;
-    	while (opcao != 0) {
+	    while (opcao != 0) {
+	    	
+	    	if(isLogged) {
+	    		
+	    		exibirMenuInicialLogado();
+	    		
+	    		opcao = ENTRADA.nextInt();
+	    		
+	            switch (opcao) {
+	                case 1:
+	                    exibirOpcaoBusca();
+	                    break;
+	                case 2:
+	                	exibirOpcaoPerfil();
+	                    
+	                    break;
+	                case 0:
+	                    System.out.println("Deslogando...");
+	                    isLogged = false;
+	                    opcao = -1;
+	                    
+	                    break;
+	                    
+	                default:
+	                    System.out.println("Opção inválida. Digite um número válido.");
+	                    
+	                    break;
+	            }
+	    	}
+	    	else {
+		        exibirMenuInicialDeslogado();
+	    		
+	            opcao = ENTRADA.nextInt();
+	
+	            switch (opcao) {
+	                case 1:
+	                	exibirOpcaoBusca();
+	                	
+	                    break;
+	                case 2:
+	                    exibirOpcaoLogin();
+	                    
+	                    break;
+	                case 3:
+	                	exibirOpcaoCadastro();
+	                	
+	                    break;
+	                case 0:
+	                    System.out.println("Encerrando o programa...");
+	                    break;
+	                default:
+	                    System.out.println("Opção inválida. Digite um número válido.");
+	                    break;
+	            }
+	        }
+    	}
+        
+   }
+	
+	public static void exibirMenuInicialDeslogado() {
+		System.out.println("Bem-vindo(a) à Tela Inicial");
+        System.out.println("============================");
+        System.out.println("Selecione uma opção:");
+        System.out.println("1. Visualizar Projetos");
+        System.out.println("2. Login");
+        System.out.println("3. Cadastrar");
+        System.out.println("0. Sair");
+        System.out.print("Digite o número da opção desejada: ");
+	}
+	
+	public static void exibirMenuInicialLogado() {
+		System.out.println("Bem-vindo(a) à Tela Inicial");
+        System.out.println("============================");
+        System.out.println("Selecione uma opção:");
+        System.out.println("1. Visualizar Projetos");
+        System.out.println("2. Ver Perfil");
+        System.out.println("0. Deslogar");
+        System.out.print("Digite o número da opção desejada: ");
+	}
+	
+	public static void exibirMenuBusca() {
+        System.out.println("===== Menu de Busca =====");
+        System.out.println("1. Buscar por nome");
+        System.out.println("2. Buscar por estado");
+        System.out.println("3. Buscar por categoria");
+        System.out.println("4. Buscar por necessidade");
+        System.out.println("0. Sair");
+        System.out.print("Digite a opção desejada: ");
+    }
+	
+	public static void exibirMeuPerfil() {
+		System.out.println("Opção selecionada: Ver Perfil");
+		System.out.println("===== Meu Perfil =====");
+        System.out.println("1. Postar uma necessidade");
+        System.out.println("2. Adicionar uma atualização");
+        System.out.println("3. Ver Publicações");
+        System.out.println("0. Retornar");
+        System.out.print("Digite a opção desejada: ");
+    }
+	
+	private static void exibirOpcaoCadastro() {
+		String temp;
+		System.out.println("Opção selecionada: Cadastrar\n");
+        
+        System.out.println("==== Cadastro de Usuário ====\n");
+        
+        do {
+        System.out.print("Nome: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String nome = temp;
+        temp = "";
+        
+        do {
+        System.out.print("Senha: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String senha = temp;
+        temp = "";
+        
+        System.out.println("\n==== Cadastro de Projeto Social ====\n");
+        
+        do {
+        System.out.print("Nome Fantasia: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String nomeFantasia = temp;
+        temp = "";
 
-	        System.out.println("Bem-vindo(a) à Tela Inicial");
-	        System.out.println("============================");
-	        System.out.println("Selecione uma opção:");
-	        System.out.println("1. Visualizar Projetos");
-	        System.out.println("2. Login");
-	        System.out.println("3. Cadastrar");
-	        System.out.println("0. Sair");
+        do {
+        System.out.print("CPF/CNPJ: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String cadastroFisJur = temp;
+        temp = "";
 
-            System.out.print("Digite o número da opção desejada: ");
-            opcao = ENTRADA.nextInt();
+        EnumCategoria[] enumCategoria = EnumCategoria.values();
+        int cont = 1;
+        do {
+        System.out.print("Categoria (escolha por número): \n");
+        for (EnumCategoria eCategoria:enumCategoria ) {
+        	System.out.println(cont+ " - " + eCategoria);
+        	cont++;
+        }
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+        String areaAtacao = temp;
+        temp = "";
+        
+        EnumNicho[] enumNicho = EnumNicho.values();
+        cont = 1;
+        do {
+        System.out.print("Publico Alvo (escolha por número): \n");
+        for(EnumNicho eNicho: enumNicho) {
+        	System.out.println(cont+ " - " + eNicho);
+        	cont++;
+        }
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null ||Integer.parseInt(temp)<1 || Integer.parseInt(temp)>11);
+        String nicho = temp;
+        temp = "";
+        
+        Categoria categoria = new Categoria();
+        categoria.setCategoria(EnumCategoria.obterPorCodigo(Integer.parseInt(areaAtacao)));
+        categoria.setNicho(EnumNicho.obterPorCodigo(Integer.parseInt(nicho)));
 
-            switch (opcao) {
-                case 1:
-                    System.out.println("Opção selecionada: Visualizar Projetos");
-                    int opcaoBusca;
+        do {
+        System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String descricao = temp;
+        temp = "";
+        
+        System.out.println("\n==== Cadastro de Localização ====\n");
+        
+        do {
+        System.out.print("País: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String pais = temp;
+        temp = "";
+        
+        do {
+        System.out.print("Estado/Província: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String estado = temp;
+        temp = "";
+        
+        do {
+        System.out.print("Rua: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String rua = temp;
+        temp = "";
+        
+        do {
+        System.out.print("Número do Imóvel: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String numEndereco = temp;
+        temp = "";
+        
+
+        System.out.print("Complemento (não obrigatório): ");
+        temp = ENTRADA.nextLine();
+        String complemento = temp;
+        temp = "";
+        
+        Localizacao localUProjetoSocial = new Localizacao();
+        localUProjetoSocial.setComplemento(complemento);
+        localUProjetoSocial.setEstadoProv(estado);
+        localUProjetoSocial.setNumero(numEndereco);
+        localUProjetoSocial.setPais(pais);
+        localUProjetoSocial.setRua(rua);
+        
+        System.out.println("\n==== Cadastro de Contato ====\n");
+        
+        do {
+        System.out.print("Telefone: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String telefone = temp;
+        temp = "";
+        
+        do {
+        System.out.print("Email: ");
+        temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String email = temp;
+        temp = "";
+        
+        System.out.print("Rede social 1 (não obrigatório): ");
+        temp = ENTRADA.nextLine();
+        String redeSocial1 = temp;
+        temp = "";
+        
+        System.out.print("Rede social 2 (não obrigatório): ");
+        temp = ENTRADA.nextLine();
+        String redeSocial2 = temp;
+        temp = "";
+        
+        Contato contatoNovoProjeto = new Contato();
+        contatoNovoProjeto.setEmail(email);
+        contatoNovoProjeto.setRedeSocial1(redeSocial1);
+        contatoNovoProjeto.setRedeSocial2(redeSocial2);
+        contatoNovoProjeto.setTelefone(telefone);
+        
+        projetoSocial = new UProjetoSocial(projetoSocialMediator.gerarIdDeCnpj(cadastroFisJur), senha, nome, localUProjetoSocial, nomeFantasia, cadastroFisJur,
+        		categoria, contatoNovoProjeto, descricao);
+        
+        isLogged = true;
+        
+        System.out.println("\n --- "+projetoSocialMediator.incluir(projetoSocial)+" ---\n");
+	}
+
+	private static void exibirOpcaoBusca() {
+		System.out.println("Opção selecionada: Visualizar Projetos");
+        int opcaoBusca;
         do {
             exibirMenuBusca();
             opcaoBusca = ENTRADA.nextInt();
@@ -76,187 +321,114 @@ public class BussolaSolidaria {
                     break;
             }
             System.out.println();
-        } while (opcaoBusca != 0);
-			 
-                    break;
-                case 2:
-                    System.out.println("Opção selecionada: Login");
-                    // Não precisa, vamo esquecer esse fluxo.
-                    break;
-                case 3:
-                    System.out.println("Opção selecionada: Cadastrar\n");
-                    
-                    System.out.println("==== Cadastro de Usuário ====\n");
-                    
-                    do {
-                    System.out.print("Nome: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String nome = temp;
-                    temp = "";
-                    
-                    do {
-                    System.out.print("Senha: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String senha = temp;
-                    temp = "";
-                    
-                    System.out.println("\n==== Cadastro de Projeto Social ====\n");
-                    
-                    do {
-                    System.out.print("Nome Fantasia: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String nomeFantasia = temp;
-                    temp = "";
+	        } while (opcaoBusca != 0);
+	}
 
-                    do {
-                    System.out.print("CPF/CNPJ: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String cadastroFisJur = temp;
-                    temp = "";
-
-                    EnumCategoria[] enumCategoria = EnumCategoria.values();
-                    int cont = 1;
-                    do {
-                    System.out.print("Categoria (escolha por número): \n");
-                    for (EnumCategoria eCategoria:enumCategoria ) {
-                    	System.out.println(cont+ " - " + eCategoria);
-                    	cont++;
-                    }
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
-                    String areaAtacao = temp;
-                    temp = "";
-                    
-                    EnumNicho[] enumNicho = EnumNicho.values();
-                    cont = 1;
-                    do {
-                    System.out.print("Publico Alvo (escolha por número): \n");
-                    for(EnumNicho eNicho: enumNicho) {
-                    	System.out.println(cont+ " - " + eNicho);
-                    	cont++;
-                    }
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null ||Integer.parseInt(temp)<1 || Integer.parseInt(temp)>11);
-                    String nicho = temp;
-                    temp = "";
-                    
-                    Categoria categoria = new Categoria();
-                    categoria.setCategoria(EnumCategoria.obterPorCodigo(Integer.parseInt(areaAtacao)));
-                    categoria.setNicho(EnumNicho.obterPorCodigo(Integer.parseInt(nicho)));
-
-                    do {
-                    System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
+	private static void exibirOpcaoPerfil() {
+	    int opcaoPerfil;
+	    String temp;
+	    
+	    System.out.println("Opção selecionada: Meu Perfil");
+	    exibirMeuPerfil();
+	    do {
+	        opcaoPerfil = ENTRADA.nextInt();
+	        ENTRADA.nextLine(); // Limpar o buffer
+	
+	        switch (opcaoPerfil) {
+	            case 1: // Cria post
+	            	System.out.println("Opção selecionada: Postar uma necessidade");
+	            	
+	            	System.out.println("\n==== Criação de Post ====\n");
+	            	
+	            	EnumNecessidades[] enumNecessidades = EnumNecessidades.values();
+	            	
+	                int cont = 1;
+	                do {
+		                System.out.print("Necessidade (escolha por número): \n");
+		                
+		                for (EnumNecessidades eNecessidade:enumNecessidades ) {
+		                	System.out.println(cont+ " - " + eNecessidade);
+		                	cont++;
+		                }
+		                temp = ENTRADA.nextLine();
+	                }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+	                int necessidade = Integer.parseInt(temp);
+	                temp = "";
+	                
+	                do {
+	                    System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
+	                    temp = ENTRADA.nextLine();
+	                    }while(temp == "" || temp == null);
                     String descricao = temp;
                     temp = "";
                     
-                    System.out.println("\n==== Cadastro de Localização ====\n");
+                    LocalDateTime atual = LocalDateTime.now();
                     
-                    do {
-                    System.out.print("País: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String pais = temp;
-                    temp = "";
+                    Post post = new Post(atual, EnumNecessidades.obterPorCodigo(necessidade), descricao);
                     
-                    do {
-                    System.out.print("Estado/Província: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String estado = temp;
-                    temp = "";
-                    
-                    do {
-                    System.out.print("Rua: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String rua = temp;
-                    temp = "";
-                    
-                    do {
-                    System.out.print("Número do Imóvel: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String numEndereco = temp;
-                    temp = "";
-                    
+                    projetoSocial.setPost(post);
+	          
+	                break;
+	            case 2: //Cria relatorio
+	                
+	                break;
+	            case 3: // mostra relatorios e posts
+	                
+	                break;
+	            case 0: // sai do perfil
+	                System.out.println("Saindo do perfil...");
+	                break;
+	            default:
+	                System.out.println("Opção inválida. Por favor, tente novamente.");
+	                break;
+	        }
+	        System.out.println();
+	        } while (opcaoPerfil != 0);
+	}
 
-                    System.out.print("Complemento (não obrigatório): ");
-                    temp = ENTRADA.nextLine();
-                    String complemento = temp;
-                    temp = "";
-                    
-                    Localizacao localUProjetoSocial = new Localizacao();
-                    localUProjetoSocial.setComplemento(complemento);
-                    localUProjetoSocial.setEstadoProv(estado);
-                    localUProjetoSocial.setNumero(numEndereco);
-                    localUProjetoSocial.setPais(pais);
-                    localUProjetoSocial.setRua(rua);
-                    
-                    System.out.println("\n==== Cadastro de Contato ====\n");
-                    
-                    do {
-                    System.out.print("Telefone: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String telefone = temp;
-                    temp = "";
-                    
-                    do {
-                    System.out.print("Email: ");
-                    temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null);
-                    String email = temp;
-                    temp = "";
-                    
-                    System.out.print("Rede social 1 (não obrigatório): ");
-                    temp = ENTRADA.nextLine();
-                    String redeSocial1 = temp;
-                    temp = "";
-                    
-                    System.out.print("Rede social 2 (não obrigatório): ");
-                    temp = ENTRADA.nextLine();
-                    String redeSocial2 = temp;
-                    temp = "";
-                    
-                    Contato contatoNovoProjeto = new Contato();
-                    contatoNovoProjeto.setEmail(email);
-                    contatoNovoProjeto.setRedeSocial1(redeSocial1);
-                    contatoNovoProjeto.setRedeSocial2(redeSocial2);
-                    contatoNovoProjeto.setTelefone(telefone);
-                    
-                    UProjetoSocial novoProjeto = new UProjetoSocial(projetoSocialMediator.gerarIdDeCnpj(cadastroFisJur), senha, nome, localUProjetoSocial, nomeFantasia, cadastroFisJur,
-                    		categoria, contatoNovoProjeto, descricao);
-                    
-                    System.out.println("\n --- "+projetoSocialMediator.incluir(novoProjeto)+" ---\n");
-                    break;
-                case 0:
-                    System.out.println("Encerrando o programa...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Digite um número válido.");
-                    break;
+	private static void exibirOpcaoLogin() {
+		String temp;
+		
+		System.out.println("Opção selecionada: Login");
+        
+        System.out.println("Digite o nome de Usuário");
+        do {
+            temp = ENTRADA.nextLine();
+        }while(temp == "" || temp == null);
+        String nomeLogin = temp;
+        temp = "";
+        
+        UProjetoSocial projetoSocialLogin = null; 
+        int usuarioEncontrado=0;
+        
+        UProjetoSocial[] projetoSocialListados = projetoSocialMediator.buscarTodos();
+        for (UProjetoSocial analisandoProjetoSocial: projetoSocialListados) {
+            if(analisandoProjetoSocial.getNome().equalsIgnoreCase(nomeLogin)) {
+                projetoSocialLogin = analisandoProjetoSocial;
+                usuarioEncontrado=1;
+                break;
             }
         }
-    	
         
-   }
-
-	
-	public static void exibirMenuBusca() {
-        System.out.println("===== Menu de Busca =====");
-        System.out.println("1. Buscar por nome");
-        System.out.println("2. Buscar por estado");
-        System.out.println("3. Buscar por categoria");
-        System.out.println("4. Buscar por necessidade");
-        System.out.println("0. Sair");
-        System.out.print("Digite a opção desejada: ");
-    }
+        if (usuarioEncontrado == 0) {
+            System.out.println("Usuário não encontrado!\n");
+        }else {
+            System.out.println("Digite a senha: ");
+            do {
+                temp = ENTRADA.nextLine();
+            }while(temp == "" || temp == null);
+            String senhaLogin = temp;
+            temp = "";
+            
+            if(projetoSocialLogin.getSenha().equalsIgnoreCase(senhaLogin)) {
+            	isLogged = true;
+                System.out.println("\n--- Logado com SUCESSO ---\n");
+                projetoSocial = projetoSocialLogin;
+            }else {
+                System.out.println("\n--- SENHA INCORRETA ---\n");
+            }
+        }
+	}
 
     public static List<UProjetoSocial> buscarPorNome(UProjetoSocialMediator projetoSocialMediator, String nome) {
         UProjetoSocial[] todos = projetoSocialMediator.buscarTodos();

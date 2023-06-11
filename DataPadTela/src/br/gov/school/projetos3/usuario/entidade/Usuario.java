@@ -28,6 +28,10 @@ public abstract class Usuario extends Identificavel {
 	public String getIdUser() {
 		return idUser;
 	}
+	
+	public String getSenha(){
+		return senha;
+	}
 
 
 	public String getCadastroFisJur() {

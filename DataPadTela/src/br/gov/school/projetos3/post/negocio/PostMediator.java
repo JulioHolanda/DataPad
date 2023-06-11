@@ -1,19 +1,16 @@
 package br.gov.school.projetos3.post.negocio;
 
-import java.time.LocalDateTime;
-
 import br.gov.school.projetos3.geral.util.StringUtil;
-import br.gov.school.projetos3.post.dao.PostDAO;
 import br.gov.school.projetos3.post.entidade.Post;
+import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
-import br.gov.school.projetos3.util.Validador;
 
 public class PostMediator {
 	private static PostMediator instance;
-	public PostDAO repositorioPost;
+	public UProjetoSocialDAO repositorioPost;
 	
 	private PostMediator() {
-		repositorioPost = new PostDAO();
+		repositorioPost = new UProjetoSocialDAO();
 	}
 	
 	public static PostMediator getInstance() {
@@ -23,16 +20,11 @@ public class PostMediator {
 		return instance;
 	}
     
-	public static String generateId(LocalDateTime dateTime, String idUser) {
-        String formattedDateTime = dateTime.toString().replace(":", "");
-        return "1_" + formattedDateTime + "_" + idUser;
-    }
-	
-	public String incluir(Post post) {
+	public String incluir(UProjetoSocial projetoSocial, Post post) {
 		String msg = validar(post); 
         if (msg == null){
         	msg = "Post registrado com Sucesso";
-            boolean res = repositorioPost.incluir(post);
+            boolean res = repositorioPost.alterar(projetoSocial);
             if (!res) {
             	msg = "Erro ao incluir Post no reposit�rio";
             }

@@ -2,9 +2,11 @@ package br.gov.school.projetos3.post.entidade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import br.gov.school.projetos3.post.Enum.EnumNecessidades;
 import br.gov.school.projetos3.post.negocio.PostMediator;
+import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
 @SuppressWarnings("serial")
 public class PostList implements Serializable {
@@ -15,10 +17,14 @@ public class PostList implements Serializable {
         this.posts = new ArrayList<>();
     }
     
-    public void addPost(Post post) {
-        posts.add(post);
-        postMediator.incluir(post);
-        
+    public void addPost(UProjetoSocial projetoSocial, Post post) {
+    	if(this.posts.size() == 3) {
+    		this.posts.remove(0);
+    		this.posts.set(0, posts.get(1));
+    		this.posts.set(1, posts.get(2));
+    	}
+	    this.posts.add(post);
+	    postMediator.incluir(projetoSocial, post);
     }
     
     public Post getSpecificPost(EnumNecessidades necessidade) {
@@ -32,6 +38,7 @@ public class PostList implements Serializable {
     }
         
     public ArrayList<Post> getAllPosts(){
+    	Collections.reverse(posts);
     	return posts;
     }
 }

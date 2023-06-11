@@ -5,20 +5,15 @@ import java.time.LocalDateTime;
 import br.gov.school.projetos3.post.Enum.EnumNecessidades;
 import br.gov.school.projetos3.usuario.entidade.Identificavel;
 
-public class Post extends Identificavel{
-	private int idPost;
+public class Post{
 	private LocalDateTime dataCriacao;
 	private EnumNecessidades Necessidade;
 	private String Descricao;
 	
-	public Post(int idPost, LocalDateTime dataCriacao, EnumNecessidades Necessidade,  String Descricao) {
-		this.idPost = idPost;
+	public Post(LocalDateTime dataCriacao, EnumNecessidades Necessidade,  String Descricao) {
 		this.dataCriacao = dataCriacao;
 		this.Necessidade = Necessidade;
 		this.Descricao = Descricao;
-	}
-	public int getIdPost() {
-		return idPost;
 	}
 	public EnumNecessidades getNecessidade() {
 		return Necessidade;
@@ -28,9 +23,5 @@ public class Post extends Identificavel{
 	}
 	public LocalDateTime getDataCriacao() {
 		return dataCriacao;
-	}
-	@Override
-	public String obterChave() {
-		return (idPost+"");
 	}
 } 
