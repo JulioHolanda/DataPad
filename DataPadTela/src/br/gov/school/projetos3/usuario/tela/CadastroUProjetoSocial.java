@@ -237,7 +237,7 @@ public class CadastroUProjetoSocial {
 				Localizacao pLocalizacao = new Localizacao();
 				pLocalizacao.setComplemento(textComplemento.getText());
 				pLocalizacao.setEstadoProv(textEstado.getText());
-				pLocalizacao.setNumero(Integer.parseInt(textNumero.getText()));
+				pLocalizacao.setNumero(textNumero.getText());
 				pLocalizacao.setPais(textPais.getText());
 				pLocalizacao.setRua(textRua.getText());
 				

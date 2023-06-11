@@ -1,24 +1,25 @@
 package br.gov.school.projetos3.util;
 
+import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.util.entidade.Localizacao;
 
 public class Validador {
 
 	public static boolean ehCepValido(Localizacao cep){
 
-		if(cep.getNumero() == 0){
+		if(StringUtil.ehNuloOuBranco(cep.getNumero())){
 	        return false;
 	    }
 
-		else if (cep.getRua() == null){
+		else if (StringUtil.ehNuloOuBranco(cep.getRua())){
 			return false;
 	    }
 
-	    else if (cep.getEstadoProv() == null) {
+	    else if (StringUtil.ehNuloOuBranco(cep.getEstadoProv())) {
 	    	return false;
 	    }
 
-	    else if (cep.getPais() == null) {
+	    else if (StringUtil.ehNuloOuBranco(cep.getPais())) {
 	    	return false;
 	    }
 	
@@ -28,7 +29,7 @@ public class Validador {
 	
 	public static boolean ehCnpjValido(String cadastroFisJur) {
 		
-		if (cadastroFisJur == null) {
+		if (StringUtil.ehNuloOuBranco(cadastroFisJur)) {
         	return false;
 	    }
 		if (cadastroFisJur.length() == 11) {

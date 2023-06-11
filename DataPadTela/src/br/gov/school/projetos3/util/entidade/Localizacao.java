@@ -3,16 +3,16 @@ package br.gov.school.projetos3.util.entidade;
 import java.io.Serializable;
 
 public class Localizacao implements Serializable{
-    private int numero;
+    private String numero;
     private String complemento;
     private String rua;
     private String estadoProv;
     private String pais;
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
     public String getComplemento() {
