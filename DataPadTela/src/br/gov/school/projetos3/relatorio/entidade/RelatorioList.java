@@ -20,7 +20,7 @@ public class RelatorioList implements Serializable{
     }
         
     public Relatorio getLastRelatorio(){
-    	Relatorio ultimo = relatorios.get(relatorios.size());
+    	Relatorio ultimo = relatorios.get(relatorios.size()-1);
     	return ultimo;
     }
     

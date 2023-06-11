@@ -1,5 +1,6 @@
 package br.gov.school.projetos3.main;
 import java.util.List;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -115,7 +116,7 @@ public class BussolaSolidaria {
     }
 	
 	public static void exibirMeuPerfil() {
-		System.out.println("Opção selecionada: Ver Perfil");
+		System.out.println("\nOpção selecionada: Ver Perfil");
 		System.out.println("===== Meu Perfil =====");
         System.out.println("1. Postar uma necessidade");
         System.out.println("2. Adicionar uma atualização");
@@ -365,8 +366,6 @@ public class BussolaSolidaria {
 	    int opcaoPerfil;
 	    String temp;
 	    
-	    System.out.println("Opção selecionada: Meu Perfil");
-	    
 	    do {
 	    	exibirMeuPerfil();
 	        opcaoPerfil = ENTRADA.nextInt();
@@ -419,7 +418,7 @@ public class BussolaSolidaria {
                     String descricaoAtualizacao = temp;
                     temp = "";
                     
-                    LocalDateTime atualAtualizacao = LocalDateTime.now();
+                    LocalDate atualAtualizacao = LocalDate.now();
                     
                     Relatorio relatorioAdd = new Relatorio(atualAtualizacao, descricaoAtualizacao);
                     
@@ -427,7 +426,6 @@ public class BussolaSolidaria {
 	            	
 	                break;
 	            case 3: // mostra relatorios e posts
-	            	String idUser = projetoSocial.getIdUser();
 	                String nomeFantasia = projetoSocial.getNomeFantasia();
 	                Categoria categoria = projetoSocial.getCategoria();
 	                String nome = projetoSocial.getNome();
@@ -438,7 +436,6 @@ public class BussolaSolidaria {
 	            	StringBuilder mensagem = new StringBuilder();
 	                mensagem.append("Nome: ").append(nome).append("\n");
 	                mensagem.append("Nome Fantasia: ").append(nomeFantasia).append("\n");
-	                mensagem.append("ID do Usuário: ").append(idUser).append("\n");
 	                mensagem.append("Categoria: ").append(categoria.getCategoria()).append("\n");
 	                mensagem.append("Contatos:\n");
 	                mensagem.append("- Telefone: ").append(contato.getTelefone()).append("\n");
