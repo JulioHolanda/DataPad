@@ -1,5 +1,6 @@
 package br.gov.school.projetos3.usuario.entidade;
 
+@SuppressWarnings("serial")
 public abstract class Usuario extends Identificavel {
 	
 	private String idUser;

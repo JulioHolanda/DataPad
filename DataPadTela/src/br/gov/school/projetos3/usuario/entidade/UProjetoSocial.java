@@ -89,8 +89,8 @@ public class UProjetoSocial extends Usuario {
 		this.isActive = isActive;
 	}
 
-	public ArrayList<Relatorio> getRelatorios() {
-		return relatorios;
+	public Relatorio getRelatorios() {
+		return relatorios.getLastRelatorio();
 	}
 	@Override
 	public String obterChave() {

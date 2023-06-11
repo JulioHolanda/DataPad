@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import br.gov.school.projetos3.util.Enum.*;
 
+@SuppressWarnings("serial")
 public class Categoria implements Serializable{
     private EnumCategoria categoria;
     private EnumNicho nicho;

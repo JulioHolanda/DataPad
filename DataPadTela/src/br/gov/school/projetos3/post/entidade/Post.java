@@ -3,7 +3,6 @@ package br.gov.school.projetos3.post.entidade;
 import java.time.LocalDateTime;
 
 import br.gov.school.projetos3.post.Enum.EnumNecessidades;
-import br.gov.school.projetos3.usuario.entidade.Identificavel;
 
 public class Post{
 	private LocalDateTime dataCriacao;

@@ -2,6 +2,7 @@ package br.gov.school.projetos3.util.entidade;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Contato implements Serializable{
 	private String telefone;
 	private String email;
