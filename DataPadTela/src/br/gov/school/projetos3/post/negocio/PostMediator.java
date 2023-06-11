@@ -5,7 +5,7 @@ import br.gov.school.projetos3.post.entidade.Post;
 import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
-public class PostMediator {
+public class PostMediator{
 	private static PostMediator instance;
 	public UProjetoSocialDAO repositorioPost;
 	

@@ -245,7 +245,7 @@ public class BussolaSolidaria {
         System.out.println("\n==== Cadastro de Contato ====\n");
         
         do {
-	        System.out.print("Telefone: ");
+	        System.out.print("Telefone (com DDD): ");
 	        temp = ENTRADA.nextLine();
         }while(temp == "" || temp == null);
         String telefone = temp;
@@ -347,8 +347,9 @@ public class BussolaSolidaria {
 	    String temp;
 	    
 	    System.out.println("Opção selecionada: Meu Perfil");
-	    exibirMeuPerfil();
+	    
 	    do {
+	    	exibirMeuPerfil();
 	        opcaoPerfil = ENTRADA.nextInt();
 	        ENTRADA.nextLine(); // Limpar o buffer
 	
@@ -413,6 +414,7 @@ public class BussolaSolidaria {
 	                String nome = projetoSocial.getNome();
 	                Contato contato = projetoSocial.getContato();
 	                Relatorio relatorio = projetoSocial.getRelatorio();
+	                ArrayList<Post >ongPosts = projetoSocial.getPosts();
 	            	
 	            	StringBuilder mensagem = new StringBuilder();
 	                mensagem.append("Nome: ").append(nome).append("\n");
@@ -425,10 +427,22 @@ public class BussolaSolidaria {
 	                mensagem.append("- Rede Social 1: ").append(contato.getRedeSocial1()).append("\n");
 	                mensagem.append("- Rede Social 2: ").append(contato.getRedeSocial2()).append("\n");
 	                
+	                if(ongPosts != null) {
+	                	for(int i=0; i<ongPosts.size(); i++) {
+	                		int msgNumber = i+1;
+	                		mensagem.append("Post "+ msgNumber +":").append("\n");
+	                		mensagem.append("- Necessidade: ").append(ongPosts.get(i).getNecessidade().getDescricao()).append("\n");
+	                		mensagem.append("- Descrição: ").append(ongPosts.get(i).getDescricao()).append("\n");
+	                		mensagem.append(" ------------------------------------------------------------- \n");
+	                	}
+	                }
 	                
-	                mensagem.append("\nInformações do Relatório:\n");
-	                mensagem.append("- Data de Criação: ").append(relatorio.getDataCriacao()).append("\n");
-	                mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
+	                if(relatorio != null) {
+		                mensagem.append("\nInformações do Relatório:\n");
+		                mensagem.append("- Data de Criação: ").append(relatorio.getDataCriacao()).append("\n");
+	                	mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
+	                }
+	                
 	                System.out.println("Informações da ONG:\n" + mensagem.toString());
 	                
 	                break;

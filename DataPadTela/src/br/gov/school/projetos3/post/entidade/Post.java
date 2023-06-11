@@ -1,10 +1,12 @@
 package br.gov.school.projetos3.post.entidade;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import br.gov.school.projetos3.post.Enum.EnumNecessidades;
 
-public class Post{
+@SuppressWarnings("serial")
+public class Post implements Serializable{
 	private LocalDateTime dataCriacao;
 	private EnumNecessidades Necessidade;
 	private String Descricao;

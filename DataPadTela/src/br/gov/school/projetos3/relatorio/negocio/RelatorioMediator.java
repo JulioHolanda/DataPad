@@ -7,7 +7,8 @@ import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
 
-public class RelatorioMediator {
+
+public class RelatorioMediator{
 	
 	private static RelatorioMediator instance;
 	public UProjetoSocialDAO repositorioRelatorio;

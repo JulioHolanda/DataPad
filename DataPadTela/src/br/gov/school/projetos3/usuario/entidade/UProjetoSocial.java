@@ -26,6 +26,8 @@ public class UProjetoSocial extends Usuario {
 		this.categoria = categoria;
 		this.contato = contato;
 		this.descricao = descricao;
+		this.posts = new PostList();
+		this.relatorios = new RelatorioList();
 		this.setActive(true);
 	}
 
@@ -44,19 +46,22 @@ public class UProjetoSocial extends Usuario {
 		return descricao;
 	}
 	
+	public Relatorio getRelatorio() {
+		if(relatorios.isEmpty()) {
+			return null;
+		}
+		return relatorios.getLastRelatorio();
+	}
+	
 	public void setPost(Post post) {
 		this.posts.addPost(this, post);
 	}
 	
 	public ArrayList<Post> getPosts() {
-		if(posts == null) {
+		if(posts.isEmpty()) {
 			return null;
 		}
 		return posts.getAllPosts();
-	}
-	
-	public Relatorio getRelatorio(){
-		return relatorios.getLastRelatorio();
 	}
 	
 	public Contato getContato() {
@@ -89,9 +94,6 @@ public class UProjetoSocial extends Usuario {
 		this.isActive = isActive;
 	}
 
-	public Relatorio getRelatorios() {
-		return relatorios.getLastRelatorio();
-	}
 	@Override
 	public String obterChave() {
 		return (this.getIdUser()+"");

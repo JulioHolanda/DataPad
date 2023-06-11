@@ -11,10 +11,9 @@ import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 @SuppressWarnings("serial")
 public class PostList implements Serializable {
     private ArrayList<Post> posts;
-    private PostMediator postMediator;
     
     public PostList() {
-        this.posts = new ArrayList<>();
+        this.posts = new ArrayList<Post>();
     }
     
     public void addPost(UProjetoSocial projetoSocial, Post post) {
@@ -23,7 +22,9 @@ public class PostList implements Serializable {
     		this.posts.set(0, posts.get(1));
     		this.posts.set(1, posts.get(2));
     	}
+    	
 	    this.posts.add(post);
+	    PostMediator postMediator = PostMediator.getInstance();
 	    postMediator.incluir(projetoSocial, post);
     }
     
@@ -40,5 +41,9 @@ public class PostList implements Serializable {
     public ArrayList<Post> getAllPosts(){
     	Collections.reverse(posts);
     	return posts;
+    }
+    
+    public boolean isEmpty() {
+    	return posts.isEmpty();
     }
 }

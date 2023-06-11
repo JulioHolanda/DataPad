@@ -1,9 +1,11 @@
 package br.gov.school.projetos3.relatorio.entidade;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
-public class Relatorio{
+@SuppressWarnings("serial")
+public class Relatorio implements Serializable{
 	private LocalDateTime dataCriacao;
 	private String descricao;
 	
