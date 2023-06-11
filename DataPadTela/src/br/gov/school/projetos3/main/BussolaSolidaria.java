@@ -154,7 +154,7 @@ public class BussolaSolidaria {
         temp = "";
 
         do {
-	        System.out.print("CPF/CNPJ: ");
+	        System.out.print("CPF/CNPJ (Apenas Números): ");
 	        temp = ENTRADA.nextLine();
         }while(temp == "" || temp == null);
         String cadastroFisJur = temp;
@@ -325,8 +325,8 @@ public class BussolaSolidaria {
                     String categoriaBusca = temp;
                     EnumCategoria enumCategoriaBusca = EnumCategoria.obterPorCodigo(Integer.parseInt(categoriaBusca));
                     List<UProjetoSocial> ongsEncontradasCategoria = buscarPorCategoria(projetoSocialMediator, enumCategoriaBusca);
-                System.out.println("Resultados da busca por categoria: " + categoriaBusca);
-                  exibirResultados(ongsEncontradasCategoria);
+                    System.out.println("Resultados da busca por categoria: " + categoriaBusca);
+                    exibirResultados(ongsEncontradasCategoria);
                     break;
                 case 4:
                     //implementação necessidade
@@ -488,10 +488,10 @@ public class BussolaSolidaria {
 	}
 
     public static List<UProjetoSocial> buscarPorNome(UProjetoSocialMediator projetoSocialMediator, String nome) {
-        UProjetoSocial[] todos = projetoSocialMediator.buscarTodos();
+        UProjetoSocial[] todos = projetoSocialMediator.consultarUProjetosSociaisOrdemAleatoria();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
-            if (ong.getNome().equalsIgnoreCase(nome)) {
+            if (ong.getNomeFantasia().equalsIgnoreCase(nome)) {
                 resultado.add(ong);
             }
         }
@@ -499,7 +499,7 @@ public class BussolaSolidaria {
     }
 
     public static List<UProjetoSocial> buscarPorEstado(UProjetoSocialMediator projetoSocialMediator, String estado) {
-        UProjetoSocial[] todos = projetoSocialMediator.buscarTodos();
+        UProjetoSocial[] todos = projetoSocialMediator.consultarUProjetosSociaisOrdemAleatoria();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
             if (ong.getCep().getEstadoProv().equalsIgnoreCase(estado)) {
@@ -510,7 +510,7 @@ public class BussolaSolidaria {
     }
 
      public static List<UProjetoSocial> buscarPorCategoria(UProjetoSocialMediator projetoSocialMediator, EnumCategoria categoria) {
-        UProjetoSocial[] todos = projetoSocialMediator.buscarTodos();
+        UProjetoSocial[] todos = projetoSocialMediator.consultarUProjetosSociaisOrdemAleatoria();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
             if (ong.getCategoria().getCategoria() == categoria) {
