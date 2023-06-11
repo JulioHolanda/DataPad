@@ -329,7 +329,26 @@ public class BussolaSolidaria {
                     exibirResultados(ongsEncontradasCategoria);
                     break;
                 case 4:
-                    //implementação necessidade
+                    System.out.print("Digite a necessidade para buscar (selecione por número: ");
+                   
+                    EnumNecessidades[] enumNecessidades = EnumNecessidades.values();
+                    int cont = 1;
+                    
+                    do {
+                    System.out.print("Necessidades (escolha por número): \n");
+                    for (EnumNecessidades eNecessidades:enumNecessidades ) {
+                    	System.out.println(cont+ " - " + eNecessidades);
+                    	cont++;
+                    }
+                    cont =1;
+                    temp = ENTRADA.nextLine();
+                    }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>8 );
+                    
+                    String necessidadesBusca = temp;
+                    EnumNecessidades enumNecessidadesBusca = EnumNecessidades.obterPorCodigo(Integer.parseInt(necessidadesBusca));
+                    List<UProjetoSocial> ongsEncontradasNecessidades = buscarPorNecessidades(projetoSocialMediator, enumNecessidadesBusca);
+                    System.out.println("Resultados da busca por necessidade: " + necessidadesBusca);
+                    exibirResultados(ongsEncontradasCategoria);
                     break;
                 case 0:
                     System.out.println("Saindo da busca...");
@@ -534,20 +553,16 @@ public class BussolaSolidaria {
         return resultado;
      }
         
-     /*public static List<UProjetoSocial> buscarPorPost(UProjetoSocialDAO projetoSocialDAO, EnumNecessidades necessidade)
+     public static List<UProjetoSocial> buscarPorPost(UProjetoSocialDAO projetoSocialDAO, EnumNecessidades necessidade)
      {
         UProjetoSocial[] todos = projetoSocialDAO.buscarTodos();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
-            PostList posts = ong.getPosts();
-            for (Post post : posts) {
-            	if (post.getNecessidade() == necessidade) {
-            		resultado.add(ong;)
-            	}
-            }
+            PostList posts = ong.getSpecificPost(necessidade);
+           
         }
         return resultado;
-    }*/
+    }
 
      public static void exibirResultados(List<UProjetoSocial> ongs) {
         if (ongs.isEmpty()) {
