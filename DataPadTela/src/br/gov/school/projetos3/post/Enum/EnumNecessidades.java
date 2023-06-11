@@ -2,8 +2,6 @@ package br.gov.school.projetos3.post.Enum;
 
 import java.io.Serializable;
 
-import br.gov.school.projetos3.util.Enum.EnumCategoria;
-
 public enum EnumNecessidades implements Serializable{
 	HIGIENE(1, "Higiene"),
 	ALIMENTO(2, "Alimento"),

@@ -1,14 +1,12 @@
 package br.gov.school.projetos3.usuario.entidade;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import br.gov.school.projetos3.post.entidade.Post;
 import br.gov.school.projetos3.post.entidade.PostList;
 import br.gov.school.projetos3.util.entidade.*;
 
+@SuppressWarnings("serial")
 public class UProjetoSocial extends Usuario {
 	private Localizacao cep;
 	private String nomeFantasia;
@@ -41,8 +39,8 @@ public class UProjetoSocial extends Usuario {
 	public String getDescricao() {
 		return descricao;
 	}
-	public PostList getPosts() {
-		return posts;
+	public ArrayList<Post> getPosts() {
+		return posts.getAllPosts();
 	}
 	public Contato getContato() {
 		return contato;

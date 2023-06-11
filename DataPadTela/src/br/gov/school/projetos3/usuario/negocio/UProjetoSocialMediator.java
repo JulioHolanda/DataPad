@@ -104,5 +104,9 @@ public class UProjetoSocialMediator {
 		return projetosSociais;
 		
 	}
+	
+	public UProjetoSocial[] buscarTodos() {
+		return repositorioUProjSocial.buscarTodos();
+	}
 
 }

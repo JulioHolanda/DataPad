@@ -2,10 +2,14 @@ package br.gov.school.projetos3.post.entidade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
+import br.gov.school.projetos3.post.Enum.EnumNecessidades;
+import br.gov.school.projetos3.post.negocio.PostMediator;
+
+@SuppressWarnings("serial")
 public class PostList implements Serializable {
-    private List<Post> posts;
+    private ArrayList<Post> posts;
+    private PostMediator postMediator;
     
     public PostList() {
         this.posts = new ArrayList<>();
@@ -13,9 +17,21 @@ public class PostList implements Serializable {
     
     public void addPost(Post post) {
         posts.add(post);
+        postMediator.incluir(post);
+        
     }
     
-    public void deletePost(Post post) {
-        posts.remove(post);
+    public Post getSpecificPost(EnumNecessidades necessidade) {
+        for (Post post : posts) {
+        	if (post.getNecessidade() == necessidade) {
+        		return post;
+        	}
+        }
+        
+        return null;
+    }
+        
+    public ArrayList<Post> getAllPosts(){
+    	return posts;
     }
 }
