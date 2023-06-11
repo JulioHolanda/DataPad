@@ -48,6 +48,9 @@ public class UProjetoSocial extends Usuario {
 	}
 	
 	public ArrayList<Post> getPosts() {
+		if(posts == null) {
+			return null;
+		}
 		return posts.getAllPosts();
 	}
 	public Contato getContato() {
