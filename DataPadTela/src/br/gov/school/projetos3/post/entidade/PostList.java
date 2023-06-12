@@ -10,6 +10,7 @@ import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
 @SuppressWarnings("serial")
 public class PostList implements Serializable {
+	private static final long serialVersionUID = 2210250118L;
     private ArrayList<Post> posts;
     
     public PostList() {
@@ -17,15 +18,19 @@ public class PostList implements Serializable {
     }
     
     public void addPost(UProjetoSocial projetoSocial, Post post) {
-    	if(this.posts.size() == 3) {
-    		this.posts.remove(0);
-    		this.posts.set(0, posts.get(1));
-    		this.posts.set(1, posts.get(2));
-    	}
-    	
-	    this.posts.add(post);
-	    PostMediator postMediator = PostMediator.getInstance();
-	    postMediator.incluir(projetoSocial, post);
+    	PostMediator postMediator = PostMediator.getInstance();
+	    if(postMediator.validar(post) == null) {
+	    	
+	    	if(this.posts.size() == 3) {
+	    		this.posts.remove(0);
+	    		this.posts.set(0, posts.get(1));
+	    		this.posts.set(1, posts.get(2));
+	    	}
+	    	
+		    this.posts.add(post);
+		    projetoSocial.setPostList(this);
+		    postMediator.incluir(projetoSocial);
+	    }
     }
 
         

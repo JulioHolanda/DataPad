@@ -7,6 +7,7 @@ import br.gov.school.projetos3.post.Enum.EnumNecessidades;
 
 @SuppressWarnings("serial")
 public class Post implements Serializable{
+	private static final long serialVersionUID = 2210250118L;
 	private LocalDateTime dataCriacao;
 	private EnumNecessidades Necessidade;
 	private String Descricao;

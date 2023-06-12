@@ -7,6 +7,7 @@ import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
 @SuppressWarnings("serial")
 public class RelatorioList implements Serializable{
+	private static final long serialVersionUID = 2210250118L;
 	private ArrayList<Relatorio> relatorios;
     
     public RelatorioList() {

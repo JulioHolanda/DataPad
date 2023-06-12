@@ -17,6 +17,7 @@ public enum EnumNicho implements Serializable{
 
     private int codigo;
     private String descricao;
+    private static final long serialVersionUID = 2210250118L;
 
     private EnumNicho(int codigo, String descricao) {
         this.codigo = codigo;

@@ -14,6 +14,7 @@ public enum EnumNecessidades implements Serializable{
     
     private int codigo;
     private String descricao;
+    private static final long serialVersionUID = 2210250118L;
     
     private EnumNecessidades(int codigo, String descricao) {
         this.codigo=codigo;

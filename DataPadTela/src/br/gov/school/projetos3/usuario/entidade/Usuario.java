@@ -1,8 +1,8 @@
 package br.gov.school.projetos3.usuario.entidade;
 
-@SuppressWarnings("serial")
+
 public abstract class Usuario extends Identificavel {
-	
+	private static final long serialVersionUID = 2210250118L;
 	private String idUser;
 	private String nome;
 	private String cadastroFisJur;

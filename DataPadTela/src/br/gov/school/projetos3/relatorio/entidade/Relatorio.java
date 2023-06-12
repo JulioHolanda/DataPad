@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class Relatorio implements Serializable{
+	private static final long serialVersionUID = 2210250118L;
 	private LocalDate dataCriacao;
 	private String descricao;
 	

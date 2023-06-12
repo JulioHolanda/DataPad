@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Contato implements Serializable{
+	private static final long serialVersionUID = 2210250118L;
 	private String telefone;
 	private String email;
 	private String redeSocial1;

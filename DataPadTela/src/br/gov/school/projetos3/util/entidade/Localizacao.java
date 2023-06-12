@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Localizacao implements Serializable{
-    private String numero;
+	private static final long serialVersionUID = 2210250118L;
+	private String numero;
     private String complemento;
     private String rua;
     private String estadoProv;

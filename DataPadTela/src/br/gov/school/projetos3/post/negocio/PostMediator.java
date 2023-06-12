@@ -20,19 +20,18 @@ public class PostMediator{
 		return instance;
 	}
     
-	public String incluir(UProjetoSocial projetoSocial, Post post) {
-		String msg = validar(post); 
-        if (msg == null){
-        	msg = "Post registrado com Sucesso";
-            boolean res = repositorioPost.alterar(projetoSocial);
-            if (!res) {
-            	msg = "Erro ao incluir Post no reposit�rio";
-            }
-        } 
+	public String incluir(UProjetoSocial projetoSocial) {
+
+    	String msg = "Post registrado com Sucesso";
+        boolean res = repositorioPost.alterar(projetoSocial);
+        if (!res) {
+        	msg = "Erro ao incluir Post no reposit�rio";
+        }
+         
         return msg;
     }
 
-	private String validar(Post post) {
+	public String validar(Post post) {
 
 		if (post.getNecessidade() == null){
 	        return "Necessidade Invalido";

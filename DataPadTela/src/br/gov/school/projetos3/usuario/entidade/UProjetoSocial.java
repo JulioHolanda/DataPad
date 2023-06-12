@@ -8,8 +8,9 @@ import br.gov.school.projetos3.relatorio.entidade.Relatorio;
 import br.gov.school.projetos3.relatorio.entidade.RelatorioList;
 import br.gov.school.projetos3.util.entidade.*;
 
-@SuppressWarnings("serial")
+
 public class UProjetoSocial extends Usuario {
+	private static final long serialVersionUID = 2210250118L;
 	private boolean isActive;
 	private Localizacao cep;
 	private String nomeFantasia;
@@ -96,6 +97,11 @@ public class UProjetoSocial extends Usuario {
 	@Override
 	public String obterChave() {
 		return (this.getIdUser()+"");
+	}
+
+	public void setPostList(PostList postList) {
+		this.posts = postList;
+		
 	}
 
 }

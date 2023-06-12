@@ -6,6 +6,7 @@ import br.gov.school.projetos3.util.Enum.*;
 
 @SuppressWarnings("serial")
 public class Categoria implements Serializable{
+	private static final long serialVersionUID = 2210250118L;
     private EnumCategoria categoria;
     private EnumNicho nicho;
 
