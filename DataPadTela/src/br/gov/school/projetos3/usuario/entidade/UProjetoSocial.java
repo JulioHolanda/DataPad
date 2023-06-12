@@ -82,7 +82,7 @@ public class UProjetoSocial extends Usuario {
 		this.descricao = descricao;
 	}
 	public void setRelatorio(Relatorio relatorio) {
-		this.setDataAtualizacao(dataAtualizacao);			
+		this.setDataAtualizacao(LocalDate.now());			
 		this.relatorios.addRelatorio(this, relatorio);	
 	}
 	public void setContato(Contato contato) {
@@ -94,9 +94,9 @@ public class UProjetoSocial extends Usuario {
 	}
 	public boolean isActive() {
 		
-		LocalDate agora = LocalDate.now();
-		agora = agora.minusYears(1L);
-		if (this.getDataAtualizacao().isBefore(agora)) {
+		LocalDate umAnoAtras = LocalDate.now();
+		umAnoAtras = umAnoAtras.minusYears(1L);
+		if (this.getDataAtualizacao().isBefore(umAnoAtras)) {
 			return false;
 		}
 		
