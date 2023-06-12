@@ -1,5 +1,6 @@
 package br.gov.school.projetos3.usuario.entidade;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import br.gov.school.projetos3.post.entidade.Post;
@@ -11,7 +12,6 @@ import br.gov.school.projetos3.util.entidade.*;
 
 public class UProjetoSocial extends Usuario {
 	private static final long serialVersionUID = 2210250118L;
-	private boolean isActive;
 	private Localizacao cep;
 	private String nomeFantasia;
 	private Categoria categoria;
@@ -19,6 +19,8 @@ public class UProjetoSocial extends Usuario {
 	private PostList posts;
 	private Contato contato;
 	private RelatorioList relatorios;
+
+	private LocalDate dataAtualizacao;
 
 	public UProjetoSocial(String idUser, String senha, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
 		super(idUser, senha , nome, cadastroFisJur);
@@ -29,7 +31,7 @@ public class UProjetoSocial extends Usuario {
 		this.descricao = descricao;
 		this.posts = new PostList();
 		this.relatorios = new RelatorioList();
-		this.setActive(true);
+		this.setDataAtualizacao(LocalDate.now());
 	}
 
 	public Localizacao getCep() {
@@ -80,19 +82,28 @@ public class UProjetoSocial extends Usuario {
 		this.descricao = descricao;
 	}
 	public void setRelatorio(Relatorio relatorio) {
-		this.relatorios.addRelatorio(this, relatorio);
+		this.setDataAtualizacao(dataAtualizacao);			
+		this.relatorios.addRelatorio(this, relatorio);	
 	}
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
 	
+	public void setRelatorios(RelatorioList relatorios) {
+		this.relatorios = relatorios;
+	}
 	public boolean isActive() {
-		return isActive;
+		
+		LocalDate agora = LocalDate.now();
+		agora = agora.minusYears(1L);
+		if (this.getDataAtualizacao().isBefore(agora)) {
+			return false;
+		}
+		
+		return true;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+
 
 	@Override
 	public String obterChave() {
@@ -102,6 +113,14 @@ public class UProjetoSocial extends Usuario {
 	public void setPostList(PostList postList) {
 		this.posts = postList;
 		
+	}
+
+	public LocalDate getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(LocalDate dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
 	}
 
 }

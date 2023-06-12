@@ -14,10 +14,14 @@ public class RelatorioList implements Serializable{
         this.relatorios = new ArrayList<Relatorio>();
     }
     
-    public void addRelatorio(UProjetoSocial projetoSocial, Relatorio relatorio) {
+    public boolean addRelatorio(UProjetoSocial projetoSocial, Relatorio relatorio) {
 	    this.relatorios.add(relatorio);
+	    projetoSocial.setRelatorios(this);
 	    RelatorioMediator relatorioMediator = RelatorioMediator.getInstance();
-	    relatorioMediator.incluir(projetoSocial, relatorio);
+	    if (relatorioMediator.incluir(projetoSocial, relatorio).compareTo("relatorio registrado com Sucesso")==0) {
+	    	return true;
+	    }
+	    return false;
     }
         
     public Relatorio getLastRelatorio(){

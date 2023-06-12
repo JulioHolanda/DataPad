@@ -495,7 +495,7 @@ public class BussolaSolidaria {
 		}
 		
 		if(relatorio != null) {
-		    mensagem.append("\nInformações do Relatório:\n");
+		    mensagem.append("\nNovidades:\n");
 		    mensagem.append("- Data de Criação: ").append(relatorio.getDataCriacao()).append("\n");
 			mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
 		}
@@ -551,7 +551,7 @@ public class BussolaSolidaria {
         UProjetoSocial[] todos = projetoSocialMediator.consultarUProjetosSociaisOrdemAleatoria();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
-            if (ong.getNomeFantasia().equalsIgnoreCase(nome)) {
+            if (ong.getNomeFantasia().equalsIgnoreCase(nome) && ong.isActive()) {
                 resultado.add(ong);
             }
         }
@@ -562,7 +562,7 @@ public class BussolaSolidaria {
         UProjetoSocial[] todos = projetoSocialMediator.consultarUProjetosSociaisOrdemAleatoria();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
-            if (ong.getCep().getEstadoProv().equalsIgnoreCase(estado)) {
+            if (ong.getCep().getEstadoProv().equalsIgnoreCase(estado) && ong.isActive()) {
                 resultado.add(ong);
             }
         }
@@ -573,7 +573,7 @@ public class BussolaSolidaria {
         UProjetoSocial[] todos = projetoSocialMediator.consultarUProjetosSociaisOrdemAleatoria();
         List<UProjetoSocial> resultado = new ArrayList<>();
         for (UProjetoSocial ong : todos) {
-            if (ong.getCategoria().getCategoria() == categoria) {
+            if (ong.getCategoria().getCategoria() == categoria && ong.isActive()) {
                 resultado.add(ong);
             }
         }
@@ -588,7 +588,7 @@ public class BussolaSolidaria {
         for (UProjetoSocial ong : todos) {
             ArrayList<Post> posts = ong.getPosts();
             for(Post post : posts) {
-            	if(post.getNecessidade() == necessidade) {
+            	if(post.getNecessidade() == necessidade && ong.isActive()) {
             		ongCount++;
             	}
             }

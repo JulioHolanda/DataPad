@@ -27,6 +27,7 @@ public class RelatorioMediator{
 	public String incluir(UProjetoSocial projetoSocial,Relatorio relatorio) {
 		String msg = validar(relatorio); 
         if (msg == null){
+        	
         	msg = "relatorio registrado com Sucesso";
             boolean res = repositorioRelatorio.alterar(projetoSocial);
             if (!res) {
