@@ -300,6 +300,9 @@ public class BussolaSolidaria {
                     List<UProjetoSocial> ongsEncontradasNome = buscarPorNome(projetoSocialMediator, nome);
                     System.out.println("Resultados da busca por nome: "+ nome);
                     exibirResultados(ongsEncontradasNome);
+                    
+                    expandirPerfil(ongsEncontradasNome);
+                    
                     break;
                 case 2:
                     System.out.print("Digite o estado para buscar: ");
@@ -307,6 +310,9 @@ public class BussolaSolidaria {
                     List<UProjetoSocial> ongsEncontradasEstado = buscarPorEstado(projetoSocialMediator, estadoBusca);
                     System.out.println("Resultados da busca por estado: " + estadoBusca);
                     exibirResultados(ongsEncontradasEstado);
+                    
+                    expandirPerfil(ongsEncontradasEstado);
+                    
                     break;
                 case 3:
                     System.out.print("Digite a categoria para buscar (selecione por número: ");
@@ -329,6 +335,9 @@ public class BussolaSolidaria {
                     List<UProjetoSocial> ongsEncontradasCategoria = buscarPorCategoria(projetoSocialMediator, enumCategoriaBusca);
                     System.out.println("Resultados da busca por categoria: " + categoriaBusca);
                     exibirResultados(ongsEncontradasCategoria);
+                    
+                    expandirPerfil(ongsEncontradasCategoria);
+                    
                     break;
                 case 4:
                     System.out.print("Digite a necessidade para buscar (selecione por número: ");
@@ -351,6 +360,9 @@ public class BussolaSolidaria {
                     List<UProjetoSocial> ongsEncontradasNecessidades = buscarPorNecessidades(projetoSocialMediator, enumNecessidadesBusca);
                     System.out.println("Resultados da busca por necessidade: " + necessidadesBusca);
                     exibirResultados(ongsEncontradasNecessidades);
+                    
+                    expandirPerfil(ongsEncontradasNecessidades);
+                    
                     break;
                 case 0:
                     System.out.println("Saindo da busca...");
@@ -363,7 +375,19 @@ public class BussolaSolidaria {
 	        } while (opcaoBusca != 0);
 	}
 	
-	private static void expandirPerfil(List<UProjetoSocial> ongs) {	}
+	private static void expandirPerfil(List<UProjetoSocial> ongs){
+		System.out.println("Digite o número do perfil que deseja visitar (Digite 0 para sair): ");
+		int escolha = ENTRADA.nextInt();
+		do {
+			if(escolha <= ongs.size() && escolha > 0) {
+				UProjetoSocial ong = ongs.get(escolha-1);
+				exibirPerfilCompleto(ong);
+				break;
+			}else {
+				System.out.println("Perfil inválido. Digite um número entre 1 e " + ongs.size());
+			}
+		}while(escolha != 0);
+	}
 
 	private static void exibirOpcaoPerfil() {
 	    int opcaoPerfil;
@@ -429,40 +453,7 @@ public class BussolaSolidaria {
 	            	
 	                break;
 	            case 3: // mostra relatorios e posts
-	                String nomeFantasia = projetoSocial.getNomeFantasia();
-	                Categoria categoria = projetoSocial.getCategoria();
-	                String nome = projetoSocial.getNome();
-	                Contato contato = projetoSocial.getContato();
-	                Relatorio relatorio = projetoSocial.getRelatorio();
-	                ArrayList<Post >ongPosts = projetoSocial.getPosts();
-	            	
-	            	StringBuilder mensagem = new StringBuilder();
-	                mensagem.append("Nome: ").append(nome).append("\n");
-	                mensagem.append("Nome Fantasia: ").append(nomeFantasia).append("\n");
-	                mensagem.append("Categoria: ").append(categoria.getCategoria()).append("\n");
-	                mensagem.append("Contatos:\n");
-	                mensagem.append("- Telefone: ").append(contato.getTelefone()).append("\n");
-	                mensagem.append("- Email: ").append(contato.getEmail()).append("\n");
-	                mensagem.append("- Rede Social 1: ").append(contato.getRedeSocial1()).append("\n");
-	                mensagem.append("- Rede Social 2: ").append(contato.getRedeSocial2()).append("\n");
-	                
-	                if(ongPosts != null) {
-	                	for(int i=0; i<ongPosts.size(); i++) {
-	                		int msgNumber = i+1;
-	                		mensagem.append("Post "+ msgNumber +":").append("\n");
-	                		mensagem.append("- Necessidade: ").append(ongPosts.get(i).getNecessidade().getDescricao()).append("\n");
-	                		mensagem.append("- Descrição: ").append(ongPosts.get(i).getDescricao()).append("\n");
-	                		mensagem.append(" ------------------------------------------------------------- \n");
-	                	}
-	                }
-	                
-	                if(relatorio != null) {
-		                mensagem.append("\nInformações do Relatório:\n");
-		                mensagem.append("- Data de Criação: ").append(relatorio.getDataCriacao()).append("\n");
-	                	mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
-	                }
-	                
-	                System.out.println("Informações da ONG:\n" + mensagem.toString());
+				exibirPerfilCompleto(projetoSocial);
 	                
 	                break;
 	            case 0: // sai do perfil
@@ -474,6 +465,43 @@ public class BussolaSolidaria {
 	        }
 	        System.out.println();
 	        } while (opcaoPerfil != 0);
+	}
+
+	private static void exibirPerfilCompleto(UProjetoSocial projetoSocial) {
+		String nomeFantasia = projetoSocial.getNomeFantasia();
+		Categoria categoria = projetoSocial.getCategoria();
+		String nome = projetoSocial.getNome();
+		Contato contato = projetoSocial.getContato();
+		Relatorio relatorio = projetoSocial.getRelatorio();
+		ArrayList<Post >ongPosts = projetoSocial.getPosts();
+		
+		StringBuilder mensagem = new StringBuilder();
+		mensagem.append("Nome: ").append(nome).append("\n");
+		mensagem.append("Nome Fantasia: ").append(nomeFantasia).append("\n");
+		mensagem.append("Categoria: ").append(categoria.getCategoria()).append("\n");
+		mensagem.append("Contatos:\n");
+		mensagem.append("- Telefone: ").append(contato.getTelefone()).append("\n");
+		mensagem.append("- Email: ").append(contato.getEmail()).append("\n");
+		mensagem.append("- Rede Social 1: ").append(contato.getRedeSocial1()).append("\n");
+		mensagem.append("- Rede Social 2: ").append(contato.getRedeSocial2()).append("\n");
+		
+		if(ongPosts != null) {
+			for(int i=0; i<ongPosts.size(); i++) {
+				int msgNumber = i+1;
+				mensagem.append("Post "+ msgNumber +":").append("\n");
+				mensagem.append("- Necessidade: ").append(ongPosts.get(i).getNecessidade().getDescricao()).append("\n");
+				mensagem.append("- Descrição: ").append(ongPosts.get(i).getDescricao()).append("\n");
+				mensagem.append(" ------------------------------------------------------------- \n");
+			}
+		}
+		
+		if(relatorio != null) {
+		    mensagem.append("\nInformações do Relatório:\n");
+		    mensagem.append("- Data de Criação: ").append(relatorio.getDataCriacao()).append("\n");
+			mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
+		}
+		
+		System.out.println("Informações da ONG:\n" + mensagem.toString());
 	}
 
 	private static void exibirOpcaoLogin() {
@@ -579,7 +607,9 @@ public class BussolaSolidaria {
             System.out.println("Nenhum resultado encontrado.");
             return;
         }
+        int count = 1;
         for (UProjetoSocial ong : ongs) {
+        	System.out.println(count+"-");
             System.out.println("Nome: " + ong.getNome());
             System.out.println("Categoria: " + ong.getCategoria().getCategoria());
             System.out.println("Localização: " + ong.getCep().getEstadoProv());
@@ -587,6 +617,7 @@ public class BussolaSolidaria {
             	System.out.println("Necessidade: " + ong.getPosts());
             }
             System.out.println("-----");
+            count++;
         }
     }
 
