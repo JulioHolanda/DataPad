@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.post.Enum.EnumNecessidades;
 import br.gov.school.projetos3.post.entidade.Post;
 import br.gov.school.projetos3.relatorio.entidade.Relatorio;
@@ -134,14 +135,14 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("Nome: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String nome = temp;
         temp = "";
         
         do {
 	        System.out.print("Senha: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String senha = temp;
         temp = "";
         
@@ -150,14 +151,14 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("Nome Fantasia: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String nomeFantasia = temp;
         temp = "";
 
         do {
 	        System.out.print("CPF/CNPJ (Apenas Números): ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String cadastroFisJur = temp;
         temp = "";
 
@@ -171,7 +172,7 @@ public class BussolaSolidaria {
 	        }
 	        cont =1;
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+        }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
         String areaAtacao = temp;
         temp = "";
         
@@ -185,7 +186,7 @@ public class BussolaSolidaria {
 	        }
 	        cont = 1;
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null ||Integer.parseInt(temp)<1 || Integer.parseInt(temp)>11);
+        }while(StringUtil.ehNuloOuBranco(temp) ||Integer.parseInt(temp)<1 || Integer.parseInt(temp)>11);
         String nicho = temp;
         temp = "";
         
@@ -196,7 +197,7 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String descricao = temp;
         temp = "";
         
@@ -205,28 +206,28 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("País: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String pais = temp;
         temp = "";
         
         do {
 	        System.out.print("Estado/Província: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String estado = temp;
         temp = "";
         
         do {
 	        System.out.print("Rua: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String rua = temp;
         temp = "";
         
         do {
 	        System.out.print("Número do Imóvel: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String numEndereco = temp;
         temp = "";
         
@@ -248,14 +249,14 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("Telefone (com DDD): ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String telefone = temp;
         temp = "";
         
         do {
 	        System.out.print("Email: ");
 	        temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String email = temp;
         temp = "";
         
@@ -275,12 +276,12 @@ public class BussolaSolidaria {
         contatoNovoProjeto.setRedeSocial2(redeSocial2);
         contatoNovoProjeto.setTelefone(telefone);
         
-        projetoSocial = new UProjetoSocial(projetoSocialMediator.gerarIdDeCnpj(cadastroFisJur), senha, nome, localUProjetoSocial, nomeFantasia, cadastroFisJur,
+        UProjetoSocial projetoSocialNovo = new UProjetoSocial(projetoSocialMediator.gerarIdDeCnpj(cadastroFisJur), senha, nome, localUProjetoSocial, nomeFantasia, cadastroFisJur,
         		categoria, contatoNovoProjeto, descricao);
         
         isLogged = true;
         
-        System.out.println("\n --- "+projetoSocialMediator.incluir(projetoSocial)+" ---\n");
+        System.out.println("\n --- "+projetoSocialMediator.incluir(projetoSocialNovo)+" ---\n");
 	}
 
 	private static void exibirOpcaoBusca() {
@@ -321,7 +322,7 @@ public class BussolaSolidaria {
                     }
                     cont =1;
                     temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+                    }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
                     
                     String categoriaBusca = temp;
                     EnumCategoria enumCategoriaBusca = EnumCategoria.obterPorCodigo(Integer.parseInt(categoriaBusca));
@@ -333,7 +334,7 @@ public class BussolaSolidaria {
                     System.out.print("Digite a necessidade para buscar (selecione por número: ");
                    
                     EnumNecessidades[] enumNecessidades = EnumNecessidades.values();
-                    int cont = 1;
+                    cont = 1;
                     
                     do {
                     System.out.print("Necessidades (escolha por número): \n");
@@ -343,13 +344,13 @@ public class BussolaSolidaria {
                     }
                     cont =1;
                     temp = ENTRADA.nextLine();
-                    }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>8 );
+                    }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>8 );
                     
                     String necessidadesBusca = temp;
                     EnumNecessidades enumNecessidadesBusca = EnumNecessidades.obterPorCodigo(Integer.parseInt(necessidadesBusca));
                     List<UProjetoSocial> ongsEncontradasNecessidades = buscarPorNecessidades(projetoSocialMediator, enumNecessidadesBusca);
                     System.out.println("Resultados da busca por necessidade: " + necessidadesBusca);
-                    exibirResultados(ongsEncontradasCategoria);
+                    exibirResultados(ongsEncontradasNecessidades);
                     break;
                 case 0:
                     System.out.println("Saindo da busca...");
@@ -361,6 +362,8 @@ public class BussolaSolidaria {
             System.out.println();
 	        } while (opcaoBusca != 0);
 	}
+	
+	private static void expandirPerfil(List<UProjetoSocial> ongs) {	}
 
 	private static void exibirOpcaoPerfil() {
 	    int opcaoPerfil;
@@ -388,14 +391,14 @@ public class BussolaSolidaria {
 		                	cont++;
 		                }
 		                temp = ENTRADA.nextLine();
-	                }while(temp == "" || temp == null || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+	                }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
 	                int necessidade = Integer.parseInt(temp);
 	                temp = "";
 	                
 	                do {
 	                    System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
 	                    temp = ENTRADA.nextLine();
-	                    }while(temp == "" || temp == null);
+	                    }while(StringUtil.ehNuloOuBranco(temp));
                     String descricaoPost = temp;
                     temp = "";
                     
@@ -414,7 +417,7 @@ public class BussolaSolidaria {
 	                do {
 	                    System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
 	                    temp = ENTRADA.nextLine();
-	                    }while(temp == "" || temp == null);
+	                    }while(StringUtil.ehNuloOuBranco(temp));
                     String descricaoAtualizacao = temp;
                     temp = "";
                     
@@ -481,7 +484,7 @@ public class BussolaSolidaria {
         System.out.println("Digite o nome de Usuário");
         do {
             temp = ENTRADA.nextLine();
-        }while(temp == "" || temp == null);
+        }while(StringUtil.ehNuloOuBranco(temp));
         String nomeLogin = temp;
         temp = "";
         
@@ -503,7 +506,7 @@ public class BussolaSolidaria {
             System.out.println("Digite a senha: ");
             do {
                 temp = ENTRADA.nextLine();
-            }while(temp == "" || temp == null);
+            }while(StringUtil.ehNuloOuBranco(temp));
             String senhaLogin = temp;
             temp = "";
             
@@ -550,14 +553,24 @@ public class BussolaSolidaria {
         return resultado;
      }
         
-     public static List<UProjetoSocial> buscarPorPost(UProjetoSocialDAO projetoSocialDAO, EnumNecessidades necessidade)
+     public static List<UProjetoSocial> buscarPorNecessidades(UProjetoSocialMediator projetoSocialMediator, EnumNecessidades necessidade)
      {
-        UProjetoSocial[] todos = projetoSocialDAO.buscarTodos();
-        List<UProjetoSocial> resultado = new ArrayList<>();
+        UProjetoSocial[] todos = projetoSocialMediator.buscarTodos();
+        ArrayList<UProjetoSocial> resultado = new ArrayList<>();
+        int ongCount = 0;
         for (UProjetoSocial ong : todos) {
-            PostList posts = ong.getSpecificPost(necessidade);
-           
+            ArrayList<Post> posts = ong.getPosts();
+            for(Post post : posts) {
+            	if(post.getNecessidade() == necessidade) {
+            		ongCount++;
+            	}
+            }
+            
+			if(ongCount > 0) {
+				resultado.add(ong);
+			}
         }
+        
         return resultado;
     }
 

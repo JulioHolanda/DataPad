@@ -31,7 +31,6 @@ public class UProjetoSocial extends Usuario {
 		this.setActive(true);
 	}
 
-
 	public Localizacao getCep() {
 		return cep;
 	}

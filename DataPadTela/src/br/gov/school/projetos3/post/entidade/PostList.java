@@ -27,16 +27,7 @@ public class PostList implements Serializable {
 	    PostMediator postMediator = PostMediator.getInstance();
 	    postMediator.incluir(projetoSocial, post);
     }
-    
-    public Post getSpecificPost(EnumNecessidades necessidade) {
-        for (Post post : posts) {
-        	if (post.getNecessidade() == necessidade) {
-        		return post;
-        	}
-        }
-        
-        return null;
-    }
+
         
     public ArrayList<Post> getAllPosts(){
     	Collections.reverse(posts);
