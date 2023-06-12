@@ -107,7 +107,7 @@ public class BussolaSolidaria {
 	}
 	
 	public static void exibirMenuBusca() {
-        System.out.println("===== Menu de Busca =====");
+        System.out.println("\n\n===== Menu de Busca =====");
         System.out.println("1. Buscar por nome");
         System.out.println("2. Buscar por estado");
         System.out.println("3. Buscar por categoria");
@@ -133,7 +133,7 @@ public class BussolaSolidaria {
         System.out.println("==== Cadastro de Usuário ====\n");
         
         do {
-	        System.out.print("Nome: ");
+	        System.out.print("Nome de usuário: ");
 	        temp = ENTRADA.nextLine();
         }while(StringUtil.ehNuloOuBranco(temp));
         String nome = temp;
@@ -298,7 +298,7 @@ public class BussolaSolidaria {
                     System.out.print("Digite o nome para buscar: ");
                     String nome = ENTRADA.nextLine();
                     List<UProjetoSocial> ongsEncontradasNome = buscarPorNome(projetoSocialMediator, nome);
-                    System.out.println("Resultados da busca por nome: "+ nome);
+                    System.out.println("\nResultados da busca por nome: "+ nome);
                     exibirResultados(ongsEncontradasNome);
                     
                     expandirPerfil(ongsEncontradasNome);
@@ -308,24 +308,24 @@ public class BussolaSolidaria {
                     System.out.print("Digite o estado para buscar: ");
                     String estadoBusca = ENTRADA.nextLine();
                     List<UProjetoSocial> ongsEncontradasEstado = buscarPorEstado(projetoSocialMediator, estadoBusca);
-                    System.out.println("Resultados da busca por estado: " + estadoBusca);
+                    System.out.println("\nResultados da busca por estado: " + estadoBusca);
                     exibirResultados(ongsEncontradasEstado);
                     
                     expandirPerfil(ongsEncontradasEstado);
                     
                     break;
                 case 3:
-                    System.out.print("Digite a categoria para buscar (selecione por número: ");
+                    System.out.print("\n\nDigite a categoria para buscar: \n");
                    
                     EnumCategoria[] enumCategoria = EnumCategoria.values();
                     int cont = 1;
                     
                     do {
-                    System.out.print("Categoria (escolha por número): \n");
                     for (EnumCategoria eCategoria:enumCategoria ) {
                     	System.out.println(cont+ " - " + eCategoria);
                     	cont++;
                     }
+                    System.out.print("Selecione a categoria por número -> ");
                     cont =1;
                     temp = ENTRADA.nextLine();
                     }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
@@ -333,24 +333,24 @@ public class BussolaSolidaria {
                     String categoriaBusca = temp;
                     EnumCategoria enumCategoriaBusca = EnumCategoria.obterPorCodigo(Integer.parseInt(categoriaBusca));
                     List<UProjetoSocial> ongsEncontradasCategoria = buscarPorCategoria(projetoSocialMediator, enumCategoriaBusca);
-                    System.out.println("Resultados da busca por categoria: " + categoriaBusca);
+                    System.out.println("\nResultados da busca por categoria: " + categoriaBusca);
                     exibirResultados(ongsEncontradasCategoria);
                     
                     expandirPerfil(ongsEncontradasCategoria);
                     
                     break;
                 case 4:
-                    System.out.print("Digite a necessidade para buscar (selecione por número: ");
+                    System.out.print("Digite a necessidade para buscar : \n");
                    
                     EnumNecessidades[] enumNecessidades = EnumNecessidades.values();
                     cont = 1;
                     
                     do {
-                    System.out.print("Necessidades (escolha por número): \n");
                     for (EnumNecessidades eNecessidades:enumNecessidades ) {
                     	System.out.println(cont+ " - " + eNecessidades);
                     	cont++;
                     }
+                    System.out.print("Selecione a necessidade por número -> ");
                     cont =1;
                     temp = ENTRADA.nextLine();
                     }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>8 );
@@ -358,7 +358,7 @@ public class BussolaSolidaria {
                     String necessidadesBusca = temp;
                     EnumNecessidades enumNecessidadesBusca = EnumNecessidades.obterPorCodigo(Integer.parseInt(necessidadesBusca));
                     List<UProjetoSocial> ongsEncontradasNecessidades = buscarPorNecessidades(projetoSocialMediator, enumNecessidadesBusca);
-                    System.out.println("Resultados da busca por necessidade: " + necessidadesBusca);
+                    System.out.println("\nResultados da busca por necessidade: " + necessidadesBusca);
                     exibirResultados(ongsEncontradasNecessidades);
                     
                     expandirPerfil(ongsEncontradasNecessidades);
@@ -486,9 +486,8 @@ public class BussolaSolidaria {
 		mensagem.append("- Rede Social 2: ").append(contato.getRedeSocial2()).append("\n");
 		
 		if(ongPosts != null) {
-			for(int i=0; i<ongPosts.size(); i++) {
-				int msgNumber = i+1;
-				mensagem.append("Post "+ msgNumber +":").append("\n");
+			for(int i=ongPosts.size()-1; i>=0; i--) {
+				mensagem.append("\nPrecisamos de:\n");
 				mensagem.append("- Necessidade: ").append(ongPosts.get(i).getNecessidade().getDescricao()).append("\n");
 				mensagem.append("- Descrição: ").append(ongPosts.get(i).getDescricao()).append("\n");
 				mensagem.append(" ------------------------------------------------------------- \n");
@@ -501,7 +500,7 @@ public class BussolaSolidaria {
 			mensagem.append("- Descrição: ").append(relatorio.getDescricao()).append("\n");
 		}
 		
-		System.out.println("Informações da ONG:\n" + mensagem.toString());
+		System.out.println("\nInformações da ONG:\n" + mensagem.toString());
 	}
 
 	private static void exibirOpcaoLogin() {
@@ -610,13 +609,15 @@ public class BussolaSolidaria {
         int count = 1;
         for (UProjetoSocial ong : ongs) {
         	System.out.println(count+"-");
-            System.out.println("Nome: " + ong.getNome());
+            System.out.println("Nome: " + ong.getNomeFantasia());
             System.out.println("Categoria: " + ong.getCategoria().getCategoria());
             System.out.println("Localização: " + ong.getCep().getEstadoProv());
             if(ong.getPosts() != null) {
-            	System.out.println("Necessidade: " + ong.getPosts());
+            	ArrayList<Post> necessidade = ong.getPosts();
+            	System.out.println("Necessidade: " + necessidade.get(2).getNecessidade() +" | " +
+            	necessidade.get(1).getNecessidade() + " | " + necessidade.get(0).getNecessidade());
             }
-            System.out.println("-----");
+            System.out.println("-----\n");
             count++;
         }
     }
