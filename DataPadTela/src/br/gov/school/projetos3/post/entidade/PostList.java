@@ -2,12 +2,11 @@ package br.gov.school.projetos3.post.entidade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import br.gov.school.projetos3.post.negocio.PostMediator;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
 
-@SuppressWarnings({ "serial" })
+
 public class PostList implements Serializable {
 	private static final long serialVersionUID = 2210250118L;
     private ArrayList<Post> posts;

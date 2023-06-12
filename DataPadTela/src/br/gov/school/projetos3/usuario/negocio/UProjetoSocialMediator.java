@@ -1,10 +1,9 @@
 package br.gov.school.projetos3.usuario.negocio;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
-
 import br.gov.school.projetos3.geral.util.StringUtil;
 import br.gov.school.projetos3.usuario.dao.UProjetoSocialDAO;
 import br.gov.school.projetos3.usuario.entidade.UProjetoSocial;
@@ -29,10 +28,11 @@ public class UProjetoSocialMediator {
     public String gerarIdDeCnpj(String cnpj) {
         // Remover caracteres não numéricos do CNPJ
         String cleanedCnpj = cnpj.replaceAll("[^0-9]", "");
+        LocalDate now = LocalDate.now();
 
-        // Gerar um ID baseado no CNPJ usando UUID
-        UUID uuid = UUID.nameUUIDFromBytes(cleanedCnpj.getBytes());
-        return uuid.toString();
+        // Gerar um ID baseado no CNPJ e data atual
+        String uuid = cleanedCnpj + now.toString();
+        return uuid;
     }
     
 	public String incluir(UProjetoSocial uProjetoSocial) {

@@ -20,15 +20,15 @@ public class PostMediator{
 		return instance;
 	}
     
-	public String incluir(UProjetoSocial projetoSocial) {
+	public void incluir(UProjetoSocial projetoSocial) {
 
     	String msg = "Post registrado com Sucesso";
         boolean res = repositorioPost.alterar(projetoSocial);
         if (!res) {
-        	msg = "Erro ao incluir Post no reposit�rio";
+        	msg = "Erro ao incluir Post no repositorio";
         }
          
-        return msg;
+        System.out.println(msg);
     }
 
 	public String validar(Post post) {

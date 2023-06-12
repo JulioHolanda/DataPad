@@ -279,9 +279,14 @@ public class BussolaSolidaria {
         UProjetoSocial projetoSocialNovo = new UProjetoSocial(projetoSocialMediator.gerarIdDeCnpj(cadastroFisJur), senha, nome, localUProjetoSocial, nomeFantasia, cadastroFisJur,
         		categoria, contatoNovoProjeto, descricao);
         
-        isLogged = true;
+        String resultado = projetoSocialMediator.incluir(projetoSocialNovo);
         
-        System.out.println("\n --- "+projetoSocialMediator.incluir(projetoSocialNovo)+" ---\n");
+        if (resultado.equalsIgnoreCase("Projeto Social registrado com Sucesso")) {
+            isLogged = true;
+            projetoSocial = projetoSocialNovo; 
+        }
+        
+        System.out.println("\n --- "+resultado+" ---\n");
 	}
 
 	private static void exibirOpcaoBusca() {
@@ -613,13 +618,14 @@ public class BussolaSolidaria {
             System.out.println("Categoria: " + ong.getCategoria().getCategoria());
             System.out.println("Localização: " + ong.getCep().getEstadoProv());
             if(ong.getPosts() != null) {
+            	System.out.print("Necessidade: ");
             	ArrayList<Post> necessidade = ong.getPosts();
-            	System.out.println("Necessidade: " + necessidade.get(2).getNecessidade() +" | " +
-            	necessidade.get(1).getNecessidade() + " | " + necessidade.get(0).getNecessidade());
+            	for (Post post : necessidade) {
+            		System.out.println(post.getNecessidade() + " | ");
+            	}
             }
             System.out.println("-----\n");
             count++;
         }
     }
-
 }

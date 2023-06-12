@@ -19,7 +19,6 @@ public class UProjetoSocial extends Usuario {
 	private PostList posts;
 	private Contato contato;
 	private RelatorioList relatorios;
-
 	private LocalDate dataAtualizacao;
 
 	public UProjetoSocial(String idUser, String senha, String nome, Localizacao cep, String nomeFantasia, String cadastroFisJur, Categoria categoria, Contato contato, String descricao) {
@@ -31,7 +30,7 @@ public class UProjetoSocial extends Usuario {
 		this.descricao = descricao;
 		this.posts = new PostList();
 		this.relatorios = new RelatorioList();
-		this.setDataAtualizacao(LocalDate.now());
+		this.dataAtualizacao = LocalDate.now();
 	}
 
 	public Localizacao getCep() {
@@ -94,8 +93,7 @@ public class UProjetoSocial extends Usuario {
 	}
 	public boolean isActive() {
 		
-		LocalDate umAnoAtras = LocalDate.now();
-		umAnoAtras = umAnoAtras.minusYears(1L);
+		LocalDate umAnoAtras = LocalDate.now().minusYears(1L);
 		if (this.getDataAtualizacao().isBefore(umAnoAtras)) {
 			return false;
 		}
@@ -103,16 +101,13 @@ public class UProjetoSocial extends Usuario {
 		return true;
 	}
 
-
-
 	@Override
 	public String obterChave() {
-		return (this.getIdUser()+"");
+		return super.getIdUser();
 	}
 
 	public void setPostList(PostList postList) {
 		this.posts = postList;
-		
 	}
 
 	public LocalDate getDataAtualizacao() {
