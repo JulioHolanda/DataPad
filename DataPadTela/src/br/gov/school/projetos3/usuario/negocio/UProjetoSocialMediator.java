@@ -82,7 +82,7 @@ public class UProjetoSocialMediator {
 	    }
 
 	    else if(Validador.ehCnpjValido(uProjetoSocial.getCadastroFisJur()) == false){
-	        return "Cadastro Invalido";
+	        return "Cadastro (CPF/CNPJ) Invalido";
 	    }
 
 	    else if (uProjetoSocial.getNome() == null) {

@@ -28,12 +28,21 @@ public class BussolaSolidaria {
     	
     	int opcao = -1;
 	    while (opcao != 0) {
+    	String opcaoString;
 	    	
 	    	if(isLogged) {
 	    		
 	    		exibirMenuInicialLogado();
 	    		
-	    		opcao = ENTRADA.nextInt();
+		    	do {
+		    		opcaoString = ENTRADA.nextLine();
+	                if(!opcaoString.matches("[0-9]+")) {
+	                	System.out.println(" - Insira um valor válido - ");
+	                	opcaoString = "";
+	                }
+		    	}while(StringUtil.ehNuloOuBranco(opcaoString) || Integer.parseInt(opcaoString)<0 || Integer.parseInt(opcaoString)>3 );
+	    		
+		    	opcao = Integer.parseInt(opcaoString);
 	    		
 	            switch (opcao) {
 	                case 1:
@@ -44,7 +53,7 @@ public class BussolaSolidaria {
 	                    
 	                    break;
 	                case 0:
-	                    System.out.println("Deslogando...");
+	                    System.out.println("\nDeslogando...\n");
 	                    isLogged = false;
 	                    opcao = -1;
 	                    
@@ -58,7 +67,15 @@ public class BussolaSolidaria {
 	    	else {
 		        exibirMenuInicialDeslogado();
 	    		
-	            opcao = ENTRADA.nextInt();
+		        do {
+		    		opcaoString = ENTRADA.nextLine();
+	                if(!opcaoString.matches("[0-9]+")) {
+	                	System.out.println(" - Insira um valor válido - ");
+	                	opcaoString = "";
+	                }
+		    	}while(StringUtil.ehNuloOuBranco(opcaoString) || Integer.parseInt(opcaoString)<0 || Integer.parseInt(opcaoString)>3 );
+	    		
+		    	opcao = Integer.parseInt(opcaoString);
 	
 	            switch (opcao) {
 	                case 1:
@@ -74,7 +91,7 @@ public class BussolaSolidaria {
 	                	
 	                    break;
 	                case 0:
-	                    System.out.println("Encerrando o programa...");
+	                    System.out.println("\nEncerrando o programa...\n");
 	                    break;
 	                default:
 	                    System.out.println("Opção inválida. Digite um número válido.");
@@ -131,7 +148,7 @@ public class BussolaSolidaria {
 		System.out.println("Opção selecionada: Cadastrar\n");
         
         System.out.println("==== Cadastro de Usuário ====\n");
-        
+
         do {
 	        System.out.print("Nome de usuário: ");
 	        temp = ENTRADA.nextLine();
@@ -151,14 +168,14 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("Nome Fantasia: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || temp.matches("[0-9]+"));
         String nomeFantasia = temp;
         temp = "";
 
         do {
 	        System.out.print("CPF/CNPJ (Apenas Números): ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || !temp.matches("[0-9]+"));
         String cadastroFisJur = temp;
         temp = "";
 
@@ -197,7 +214,7 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("(Descricao) Fale um pouco sobre o projeto: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || temp.matches("[0-9]+"));
         String descricao = temp;
         temp = "";
         
@@ -206,28 +223,28 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("País: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || temp.matches("[0-9]+"));
         String pais = temp;
         temp = "";
         
         do {
 	        System.out.print("Estado/Província: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || temp.matches("[0-9]+"));
         String estado = temp;
         temp = "";
         
         do {
 	        System.out.print("Rua: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || temp.matches("[0-9]+"));
         String rua = temp;
         temp = "";
         
         do {
 	        System.out.print("Número do Imóvel: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || !temp.matches("[0-9]+"));
         String numEndereco = temp;
         temp = "";
         
@@ -249,14 +266,14 @@ public class BussolaSolidaria {
         do {
 	        System.out.print("Telefone (com DDD): ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) );
         String telefone = temp;
         temp = "";
         
         do {
 	        System.out.print("Email: ");
 	        temp = ENTRADA.nextLine();
-        }while(StringUtil.ehNuloOuBranco(temp));
+        }while(StringUtil.ehNuloOuBranco(temp) || temp.matches("[0-9]+"));
         String email = temp;
         temp = "";
         
@@ -292,10 +309,20 @@ public class BussolaSolidaria {
 	private static void exibirOpcaoBusca() {
 		System.out.println("Opção selecionada: Visualizar Projetos");
         int opcaoBusca;
+        String opcaoBuscaString;
         do {
             exibirMenuBusca();
-            opcaoBusca = ENTRADA.nextInt();
-            ENTRADA.nextLine(); // Limpar o buffer
+            
+            do {
+            	opcaoBuscaString = ENTRADA.nextLine();
+                if(!opcaoBuscaString.matches("[0-9]+")) {
+                	System.out.println(" - Insira um valor válido - ");
+                	opcaoBuscaString = "";
+                }
+	    	}while(StringUtil.ehNuloOuBranco(opcaoBuscaString) || Integer.parseInt(opcaoBuscaString)<0 || Integer.parseInt(opcaoBuscaString)>4 );
+            
+            opcaoBusca = Integer.parseInt(opcaoBuscaString);
+ // Limpar o buffer
             String temp;
             switch (opcaoBusca) {
           
@@ -333,7 +360,10 @@ public class BussolaSolidaria {
                     System.out.print("Selecione a categoria por número -> ");
                     cont =1;
                     temp = ENTRADA.nextLine();
-                    }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+                    if(!temp.matches("[0-9]+")) {
+                    	temp = "";
+                    }
+                    }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6);
                     
                     String categoriaBusca = temp;
                     EnumCategoria enumCategoriaBusca = EnumCategoria.obterPorCodigo(Integer.parseInt(categoriaBusca));
@@ -382,28 +412,46 @@ public class BussolaSolidaria {
 	
 	private static void expandirPerfil(List<UProjetoSocial> ongs){
 		System.out.println("Digite o número do perfil que deseja visitar (Digite 0 para sair): ");
-		int escolha = ENTRADA.nextInt();
+		
+		
+		
+		int escolha;
+		String escolhaString;
 		do {
+			escolhaString = ENTRADA.nextLine();
+			if(escolhaString.matches("[0-9]+")) {
+				escolha = Integer.parseInt(escolhaString);
+			}else {
+				escolha= -1;
+			}
 			if(escolha <= ongs.size() && escolha > 0) {
 				UProjetoSocial ong = ongs.get(escolha-1);
 				exibirPerfilCompleto(ong);
 				break;
-			}else {
+			}else if (escolha < 0){
 				System.out.println("Perfil inválido. Digite um número entre 1 e " + ongs.size());
 			}
 		}while(escolha != 0);
 	}
 
 	private static void exibirOpcaoPerfil() {
-	    int opcaoPerfil;
+	    String opcaoPerfil;
+	    int opcaoPerfilInt;
 	    String temp;
 	    
 	    do {
 	    	exibirMeuPerfil();
-	        opcaoPerfil = ENTRADA.nextInt();
-	        ENTRADA.nextLine(); // Limpar o buffer
-	
-	        switch (opcaoPerfil) {
+	    	do {
+	    		opcaoPerfil = ENTRADA.nextLine();
+                if(!opcaoPerfil.matches("[0-9]+")) {
+                	System.out.println(" - Insira um valor válido - ");
+                	opcaoPerfil = "";
+                }
+	    	}while(StringUtil.ehNuloOuBranco(opcaoPerfil) || Integer.parseInt(opcaoPerfil)<0 || Integer.parseInt(opcaoPerfil)>3 );
+	        //ENTRADA.nextLine(); // Limpar o buffer
+	        
+	        opcaoPerfilInt = Integer.parseInt(opcaoPerfil);
+	        switch (opcaoPerfilInt) {
 	            case 1: // Cria post
 	            	System.out.println("Opção selecionada: Postar uma necessidade");
 	            	
@@ -419,8 +467,11 @@ public class BussolaSolidaria {
 		                	System.out.println(cont+ " - " + eNecessidade);
 		                	cont++;
 		                }
+		                cont=1;
 		                temp = ENTRADA.nextLine();
-	                }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>6 );
+		                if(!temp.matches("[0-9]+"))
+		                	temp = "";
+	                }while(StringUtil.ehNuloOuBranco(temp) || Integer.parseInt(temp)<1 || Integer.parseInt(temp)>8 );
 	                int necessidade = Integer.parseInt(temp);
 	                temp = "";
 	                
@@ -469,7 +520,7 @@ public class BussolaSolidaria {
 	                break;
 	        }
 	        System.out.println();
-	        } while (opcaoPerfil != 0);
+	        } while (opcaoPerfilInt != 0);
 	}
 
 	private static void exibirPerfilCompleto(UProjetoSocial projetoSocial) {
@@ -484,6 +535,7 @@ public class BussolaSolidaria {
 		mensagem.append("Nome: ").append(nome).append("\n");
 		mensagem.append("Nome Fantasia: ").append(nomeFantasia).append("\n");
 		mensagem.append("Categoria: ").append(categoria.getCategoria()).append("\n");
+		mensagem.append("Público Alvo: ").append(categoria.getNicho()).append("\n");
 		mensagem.append("Contatos:\n");
 		mensagem.append("- Telefone: ").append(contato.getTelefone()).append("\n");
 		mensagem.append("- Email: ").append(contato.getEmail()).append("\n");
@@ -511,9 +563,9 @@ public class BussolaSolidaria {
 	private static void exibirOpcaoLogin() {
 		String temp;
 		
-		System.out.println("Opção selecionada: Login");
+		System.out.println(" - Opção selecionada: Login -\n");
         
-        System.out.println("Digite o nome de Usuário");
+        System.out.print("Digite o nome de Usuário:");
         do {
             temp = ENTRADA.nextLine();
         }while(StringUtil.ehNuloOuBranco(temp));
@@ -533,9 +585,9 @@ public class BussolaSolidaria {
         }
         
         if (usuarioEncontrado == 0) {
-            System.out.println("Usuário não encontrado!\n");
+            System.out.println("\n - Usuário não encontrado! -\n");
         }else {
-            System.out.println("Digite a senha: ");
+            System.out.print("Digite a senha: ");
             do {
                 temp = ENTRADA.nextLine();
             }while(StringUtil.ehNuloOuBranco(temp));
@@ -592,10 +644,13 @@ public class BussolaSolidaria {
         int ongCount = 0;
         for (UProjetoSocial ong : todos) {
             ArrayList<Post> posts = ong.getPosts();
-            for(Post post : posts) {
-            	if(post.getNecessidade() == necessidade && ong.isActive()) {
-            		ongCount++;
-            	}
+            if(posts !=null)
+            {	
+	            for(Post post : posts) {
+	            	if(post.getNecessidade() == necessidade && ong.isActive()) {
+	            		ongCount++;
+	            	}
+	            }
             }
             
 			if(ongCount > 0) {
